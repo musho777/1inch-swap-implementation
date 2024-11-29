@@ -7,33 +7,6 @@
   width: 480px;
 }
 
-.header {
-  display: flex;
-  width: 100%;
-  margin-bottom: 6px;
-  justify-content: space-between;
-}
-
-.headerTabs {
-  align-items: center;
-  margin-left: 12px;
-}
-
-.headerTabs>p {
-  color: #fff;
-  font-weight: 500;
-  line-height: 24px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.header>div {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
 .TokeninputWrapper {
   display: flex;
   flex-direction: column;
@@ -59,13 +32,7 @@
   cursor: pointer;
 }
 
-.limitL {
-  color: #6c86ad
-}
 
-.limitL:hover {
-  color: #2f8af5;
-}
 
 .button:hover {
   background-color: rgb(47 138 245 / 24%);
@@ -73,7 +40,6 @@
 
 .swapDirectionArrow {
   position: absolute;
-  background-color: red;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -87,8 +53,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.headerActions {
-  cursor: pointer;
 }

@@ -1,21 +1,14 @@
+"use client"
 import './styles.css'
-import { DownSvg, FiltrSvg, WalletSvg } from '../Components/svg'
-import { Refresh } from '../Components/svg'
+import { DownSvg, WalletSvg } from '../Components/svg'
 import { Tokeninput } from './Tokeninput/Tokeninput'
 import { SelectToken } from './SelectToken/SelectToken'
-import { Select } from './select/Select'
+import { useState } from 'react'
+import { Header } from './Heade/Hearder'
 const Swap = () => {
+
   return <div className='main'>
-    <div className='header'>
-      <div className='headerTabs'>
-        <p className='swapP'>Swap</p>
-        <p className='limitL' >Limit</p>
-      </div>
-      <div className='headerActions'>
-        <Refresh />
-        <FiltrSvg />
-      </div>
-    </div>
+    <Header />
     <div className='TokeninputWrapper'>
       <Tokeninput />
       <div className='swapDirectionArrow'>
@@ -25,8 +18,7 @@ const Swap = () => {
     </div>
     <div>
       <button className='button'>
-        <WalletSvg />
-        Connect wallet
+        <WalletSvg /> Connect wallet
       </button>
     </div>
   </div>
