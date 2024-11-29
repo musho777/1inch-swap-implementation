@@ -1,6 +1,6 @@
 import './styles.css'
 import '../Tokeninput/styles.css'
-import { ButtonArrow } from '../svg'
+import { ButtonArrow } from '../../../../utils/svg'
 export const SelectToken = () => {
   return <div className="tokeninput selectToken">
     <div className='selectTokenDiv'>
@@ -18,4 +18,4 @@ export const SelectToken = () => {
       />
     </div>
   </div>
-}
+} 

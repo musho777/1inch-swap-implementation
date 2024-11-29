@@ -1,10 +1,9 @@
 "use client"
 import './styles.css'
-import { DownSvg, WalletSvg } from '../Components/svg'
-import { Tokeninput } from './Tokeninput/Tokeninput'
-import { SelectToken } from './SelectToken/SelectToken'
-import { useState } from 'react'
-import { Header } from './Heade/Hearder'
+import { DownSvg, WalletSvg } from '../../utils/svg'
+import { Tokeninput } from './components/Tokeninput/Tokeninput'
+import { Header } from './components/Heade/Hearder'
+import { SelectToken } from './components/SelectToken/SelectToken'
 const Swap = () => {
 
   return <div className='main'>

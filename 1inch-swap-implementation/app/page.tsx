@@ -1,4 +1,4 @@
-import Swap from './Components/Swap'
+import Swap from './Components/Swap/Swap'
 
 export default function Home() {
   return (

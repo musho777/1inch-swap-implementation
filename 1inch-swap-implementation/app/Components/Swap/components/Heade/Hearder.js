@@ -1,5 +1,5 @@
 import './styles.css'
-import { Refresh, FiltrSvg } from '../svg'
+import { Refresh, FiltrSvg } from '../../../../utils/svg'
 import { useState } from 'react';
 export const Header = () => {
 

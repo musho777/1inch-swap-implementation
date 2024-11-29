@@ -1,4 +1,4 @@
-import { ArrowSvg } from "../svg"
+import { ArrowSvg } from "../../../../utils/svg"
 
 export const Select = () => {
   return <div className='selectWrapper'>
