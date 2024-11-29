@@ -1,0 +1,94 @@
+.main {
+  background-color: #131823;
+  max-width: 480px;
+  min-height: 100px;
+  padding: 12px;
+  border-radius: 24px;
+  width: 480px;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  margin-bottom: 6px;
+  justify-content: space-between;
+}
+
+.headerTabs {
+  align-items: center;
+  margin-left: 12px;
+}
+
+.headerTabs>p {
+  color: #fff;
+  font-weight: 500;
+  line-height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.header>div {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.TokeninputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+}
+
+.button {
+  background-color: rgb(47 138 245 / 16%);
+  border: none;
+  width: 100%;
+  color: rgb(47 138 245);
+  padding: 11px 18px;
+  font-size: 16px;
+  border-radius: 16px;
+  line-height: 26px;
+  font-weight: 500;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.limitL {
+  color: #6c86ad
+}
+
+.limitL:hover {
+  color: #2f8af5;
+}
+
+.button:hover {
+  background-color: rgb(47 138 245 / 24%);
+}
+
+.swapDirectionArrow {
+  position: absolute;
+  background-color: red;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #232c3d;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .25);
+  top: 12px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerActions {
+  cursor: pointer;
+}

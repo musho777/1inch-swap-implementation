@@ -1,0 +1,35 @@
+.selectToken {
+  gap: 0 !important;
+  background-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #202835;
+}
+
+.selectTokenDiv {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectButton {
+  border: none;
+  background-color: rgba(47, 138, 245, .16);
+  color: #2f8af5;
+  padding: 6px 5px 6px 8px;
+  margin-left: -8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.selectButton:hover {
+  background: #2f8af5;
+  color: white;
+}
+
+.selectButton:hover #SVGRepo_iconCarrier>path {
+  stroke: white;
+}
