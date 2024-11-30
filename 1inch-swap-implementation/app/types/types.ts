@@ -1,0 +1,1 @@
+export type SetPage = (e: boolean) => void;

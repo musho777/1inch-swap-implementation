@@ -2,15 +2,17 @@
 import { useState } from 'react';
 import './styles.css'
 import { Select } from '../select/Select'
-interface SwapProps {
-  setPage: (e: boolean) => void; // Define the type for setPage
+import { SetPage } from '@/app/types/types';
+
+interface TokeninputProps {
+  setPage: SetPage;
 }
-export const Tokeninput = ({ setPage }) => {
+export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
 
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const rawValue = event.target.value;
     const cleanedValue = rawValue.replace(/\D/g, '');
     if (cleanedValue !== '') {
@@ -28,7 +30,7 @@ export const Tokeninput = ({ setPage }) => {
   return <div className='tokeninput'>
     <p className='font13'>You pay</p>
     <div className='inputwrapper'>
-      <Select setPage={(e) => setPage(false)} />
+      <Select setPage={() => setPage(false)} />
       <input
         maxLength={19}
         className='input'
