@@ -105,9 +105,8 @@ a {
 
 .page {
   justify-content: center;
-  align-items: center;
   display: flex;
-  height: 100vh;
+  margin-top: 100px;
 }
 
 .main {

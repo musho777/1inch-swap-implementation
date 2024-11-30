@@ -22,7 +22,26 @@
 
 .selectTokenHeaderBack {
   position: absolute;
-  left: 16px;
+  left: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.selectTokenHeaderBack:hover {
+  background: rgba(108, 134, 173, 0.15);
+  transition: 0.2s;
+}
+
+.selectTokenHeaderBack:hover>svg {
+  fill: #c1c2c5;
+  transition: 0.2s;
 }
 
 .allNetworks {

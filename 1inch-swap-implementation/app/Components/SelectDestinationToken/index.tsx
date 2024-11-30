@@ -3,10 +3,15 @@ import { SearchInput } from './components/searchInput/searchInput'
 import { FavouriteToken } from './components/favouriteToken/favouriteToken'
 import { TokenItem } from './components/tokenItem/tokenItem'
 import { BackSvg, ButtonArrow } from '@/app/utils/svg'
-const SelectDestinationToken = () => {
+
+interface SwapProps {
+  setPage: (e: boolean) => void; // Define the type for setPage
+}
+
+const SelectDestinationToken = ({ setPage }: SwapProps) => {
   return <div className="main" id="selectDestinationToken">
     <div className='selectTokenHeader'>
-      <div className='selectTokenHeaderBack'>
+      <div onClick={() => setPage(true)} className='selectTokenHeaderBack'>
         <BackSvg />
       </div>
       <div className='allNetworks'>

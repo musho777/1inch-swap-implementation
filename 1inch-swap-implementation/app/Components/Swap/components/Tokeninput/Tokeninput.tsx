@@ -2,7 +2,11 @@
 import { useState } from 'react';
 import './styles.css'
 import { Select } from '../select/Select'
-export const Tokeninput = () => {
+interface SwapProps {
+  setPage: (e: boolean) => void; // Define the type for setPage
+}
+export const Tokeninput = ({ setPage }) => {
+
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
 
@@ -24,7 +28,7 @@ export const Tokeninput = () => {
   return <div className='tokeninput'>
     <p className='font13'>You pay</p>
     <div className='inputwrapper'>
-      <Select />
+      <Select setPage={(e) => setPage(false)} />
       <input
         maxLength={19}
         className='input'

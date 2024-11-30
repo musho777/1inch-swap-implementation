@@ -1,11 +1,15 @@
 import './styles.css'
 import '../Tokeninput/styles.css'
 import { ButtonArrow } from '../../../../utils/svg'
-export const SelectToken = () => {
+
+interface SwapProps {
+  setPage: (e: boolean) => void; // Define the type for setPage
+}
+export const SelectToken = ({ setPage }: SwapProps) => {
   return <div className="tokeninput selectToken">
     <div className='selectTokenDiv'>
       <div>
-        <button className='selectButton'>
+        <button onClick={(e) => setPage(true)} className='selectButton'>
           Select a token
           <ButtonArrow />
         </button>
