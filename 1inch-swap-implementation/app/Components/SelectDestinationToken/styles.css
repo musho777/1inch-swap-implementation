@@ -1,0 +1,45 @@
+.TokenItemWrapper {
+  overflow-y: scroll;
+  max-height: 300px;
+  padding: 0 4px;
+}
+
+#selectDestinationToken {
+  padding: 0 !important;
+}
+
+.selectDestinationToken {
+  padding: 0 12px !important;
+}
+
+.selectTokenHeader {
+  padding: 10px 16px 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.selectTokenHeaderBack {
+  position: absolute;
+  left: 16px;
+}
+
+.allNetworks {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 12px 6px 6px;
+  margin-left: 20px;
+}
+
+.allNetworks:hover {
+  background-color: #10141c;
+  border-radius: 10px;
+}
+
+.allNetworks>p {
+  margin: 0 4px 0 8px;
+  font-size: 16px;
+  line-height: 24px;
+}

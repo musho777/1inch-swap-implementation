@@ -110,6 +110,16 @@ a {
   height: 100vh;
 }
 
+.main {
+  background-color: #131823;
+  max-width: 480px;
+  min-height: 100px;
+  padding: 12px;
+  border-radius: 24px;
+  width: 480px;
+  max-height: 706px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

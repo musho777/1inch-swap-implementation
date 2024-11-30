@@ -58,11 +58,11 @@ export const WalletSvg = () => {
   </svg>
 }
 
-export const ButtonArrow = () => {
+export const ButtonArrow = ({ color = "#2f8af5" }) => {
   return <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24" fill="none">
     <g id="SVGRepo_bgCarrier" stroke-width="0" />
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-    <g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#2f8af5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </g>
+    <g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </g>
   </svg>
 }
 
@@ -71,4 +71,28 @@ export const DownSvg = () => {
   return <svg width="24" height="12" style={{ transform: 'rotate(180deg)', marginTop: 2 }} >
     <path d="M12 2L12 22M12 2L8 6M12 2L16 6" stroke="#44556f" strokeWidth="2" strokeLinecap="round" />
   </svg>
+}
+
+export const SearchSvg = () => {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
+    <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+}
+
+export const ClearSvg = () => {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+    <path d="M8 8L16 16" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M16 8L8 16" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+}
+
+export const PinIcon = () => {
+  return <svg xmlns="http://www.w3.org/2000/svg" fill="#6c86ad" width="23px" height="23px" viewBox="-7.5 0 32 32" version="1.1">
+    <title>pin-alt</title>
+    <path d="M16.52 12.72l-4.84-4.84c-0.16-0.16-0.44-0.28-0.68-0.24s-0.48 0.16-0.6 0.36l-3.52 5.16-3.72 0.84c-0.28 0.080-0.52 0.28-0.64 0.6-0.080 0.28 0 0.6 0.2 0.84l2.52 2.52-5 5c-0.32 0.32-0.32 0.84 0 1.2 0.16 0.16 0.36 0.24 0.6 0.24s0.44-0.080 0.6-0.24l5.040-5.040 2.52 2.52c0.16 0.16 0.36 0.24 0.6 0.24 0.080 0 0.16 0 0.24-0.040 0.28-0.080 0.52-0.32 0.6-0.64l0.84-3.72 5.16-3.48c0.2-0.16 0.32-0.36 0.36-0.6-0.040-0.28-0.080-0.52-0.28-0.68zM10.080 16.32c-0.16 0.12-0.28 0.32-0.36 0.52l-0.6 2.56-4.12-4.12 2.56-0.56c0.2-0.040 0.4-0.16 0.52-0.36l3.12-4.56 3.4 3.4-4.52 3.12z" />
+  </svg>
+}
+
+export const BackSvg = () => {
+  return <svg xmlns="http://www.w3.org/2000/svg" fill="#fbfbfb" width="16px" height="16px" viewBox="0 0 96 96"><title /><path d="M39.3756,48.0022l30.47-25.39a6.0035,6.0035,0,0,0-7.6878-9.223L26.1563,43.3906a6.0092,6.0092,0,0,0,0,9.2231L62.1578,82.615a6.0035,6.0035,0,0,0,7.6878-9.2231Z" /></svg>
 }
