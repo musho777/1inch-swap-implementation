@@ -1,11 +1,11 @@
 export const FiltrSvg = () => {
   return <svg xmlns="http://www.w3.org/2000/svg" id="settings" viewBox="0 0 24 24" fill="none" width="24" height="24">
-    <circle cx="9" cy="8" r="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="15" cy="16" r="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <path d="M11 8L20 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <path d="M4 8H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <path d="M17 16H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <path d="M4 16H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="9" cy="8" r="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <circle cx="15" cy="16" r="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M11 8L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M4 8H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M17 16H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M4 16H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
   </svg>
 }
 
@@ -41,7 +41,7 @@ export const Refresh = () => {
         transition: 'stroke 1s ease-out', // Animate the color change over 1 second
       }}
     />
-    {/* <path d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /> */}
+    {/* <path d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14" stroke="white" strokeWidth="2" stroke-linecap="round" strokeLinejoin="round" /> */}
   </svg>
 }
 
@@ -60,9 +60,9 @@ export const WalletSvg = () => {
 
 export const ButtonArrow = ({ color = "#2f8af5" }) => {
   return <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24" fill="none">
-    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-    <g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /> </g>
+    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" strokeLinejoin="round" />
+    <g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke={color} stroke-width="1.5" stroke-linecap="round" strokeLinejoin="round" /> </g>
   </svg>
 }
 
@@ -75,14 +75,14 @@ export const DownSvg = () => {
 
 export const SearchSvg = () => {
   return <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
-    <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#6c86ad" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 }
 
 export const ClearSvg = () => {
   return <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
-    <path d="M8 8L16 16" stroke="#6c86ad" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M16 8L8 16" stroke="#6c86ad" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M8 8L16 16" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" strokeLinejoin="round" />
+    <path d="M16 8L8 16" stroke="#6c86ad" stroke-width="2" stroke-linecap="round" strokeLinejoin="round" />
   </svg>
 }
 
