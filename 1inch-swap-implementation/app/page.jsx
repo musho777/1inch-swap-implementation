@@ -75,7 +75,6 @@ export default function Home() {
   }
 
 
-  console.log(selectedToken[1])
 
   const GetPrice = async () => {
     setLoading(true)
@@ -88,7 +87,6 @@ export default function Home() {
         },
       });
       const result = await response.json();
-      console.log(result, 'result')
       setLoading(false)
       setPrices(result)
     } catch (err) {
@@ -119,7 +117,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log("++++++++++++")
     setPrice1(prices[selectedToken[0]?.address])
     setPrice2(prices[selectedToken[1]?.address])
   }, [prices, selectedToken[1]?.address])

@@ -13,35 +13,23 @@ export const Tokeninput = ({
   Change,
   price,
   loading,
-  res,
-  price2,
   inputValue,
-  setInputValue
+  setInputValue,
+  result
 }) => {
-  // const [inputValue, setInputValue] = useState("");
-  const [result, setResult] = useState("")
 
   const handleInputChange = (event) => {
     const rawValue = event;
-    const cleanedValue = rawValue.replace(/\D/g, '');
+    const cleanedValue = rawValue.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
     sessionStorage.setItem("value", rawValue)
     if (!second) {
       Change(Number(cleanedValue))
     }
+    console.log(cleanedValue, '2')
     if (cleanedValue !== '') {
-      const number = Number(cleanedValue) * price;
-      const formattedNumber = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(number);
-
-      const formattedResult = formattedNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-
-      setResult(formattedResult);
       const formattedInput = cleanedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
       setInputValue(formattedInput);
     } else {
-      setResult('');
       setInputValue('');
     }
   }
@@ -77,14 +65,14 @@ export const Tokeninput = ({
         </div> :
         <Select name={selectedToken.symbol} img={selectedToken?.logoURI} setPage={() => setPage(false)} />
       }
-      <div>
+      <div className='inputLoading'>
         {(loading && selectedToken) ?
           <Skeleton width={"200px"} baseColor="#202020" highlightColor="#444" /> :
           <input
             disabled={second}
             maxLength={19}
             className='input'
-            value={!second ? inputValue : res}
+            value={!inputValue ? "" : (second ? inputValue.toFixed(3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : inputValue?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '))}
             onChange={(e) => handleInputChange(e.target.value)}
           />
         }
@@ -92,12 +80,12 @@ export const Tokeninput = ({
     </div>
     {selectedToken && !second && <div className='result'>
       <p id="selectedName">{selectedToken?.name}</p>
-      {result && <p>~${result}</p>}
+      {result > 0 && <p>{Price(result)}</p>}
     </div>}
     {selectedToken && second &&
       <div className='result'>
         <p id="selectedName">{selectedToken?.name}</p>
-        {<p>{Price((price2 * res))}</p>}
+        {result > 0 && <p>{Price(result)}</p>}
       </div>
     }
   </div>

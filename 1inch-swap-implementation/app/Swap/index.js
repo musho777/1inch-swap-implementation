@@ -18,8 +18,11 @@ const Swap = ({
 }) => {
   const [connected, setConnected] = useState()
   const [inputValue, setInputValue] = useState("");
-  const [res, setRes] = useState(0)
-  const [value, setValue] = useState(1)
+  const [value1, setValue1] = useState(1)
+  const [value2, setValue2] = useState()
+  const [kayf, setKayf] = useState(2)
+  const [result, setResult] = useState("")
+
   const [isRotated, setIsRotated] = useState(false);
 
   async function connectWallet1() {
@@ -42,7 +45,11 @@ const Swap = ({
     }
   }
 
-
+  useEffect(() => {
+    let kayficent = price1 / price2
+    setKayf(kayficent)
+    setValue2(value1 * kayficent)
+  }, [price1, price2])
 
 
 
@@ -50,26 +57,21 @@ const Swap = ({
     connectWallet1()
   }, [])
 
-  useEffect(() => {
-    if (price2 == 0) {
-      setRes(0)
-    }
-    else {
-      setRes(value * price1 / price2)
-    }
-  }, [price1, price2])
 
   const Change = (e) => {
-    setValue(e)
-    setRes(price1 / price2 * e)
+    setValue1(e)
+    setValue2(e * kayf)
+    setResult(e * price1)
   }
+  console.log(result)
   return <div className='main'>
     <Header GetPrice={() => GetPrice()} />
     <div className='TokeninputWrapper'>
       <Tokeninput
-        inputValue={inputValue}
+        inputValue={value1}
         setInputValue={(e) => setInputValue(e)}
         price={price1}
+        result={value1 * price1}
         length={false}
         Change={(e) => Change(e)}
         selectedToken={selectedToken[0]}
@@ -85,9 +87,10 @@ const Swap = ({
           transition: "transform 0.3s ease",
         }}
         onClick={() => {
+          setKayf(1 / kayf)
           ChangeDirection()
-          setInputValue(res)
-          setRes(res * 3)
+          setValue1(value2)
+          setValue2(value1)
           setIsRotated(!isRotated)
         }}
         className='swapDirectionArrow'
@@ -95,11 +98,12 @@ const Swap = ({
         <DownSvg />
       </div>
       <Tokeninput
-        res={(res && res != 'Infinity') ? res : ""}
-        inputValue={inputValue}
+        inputValue={value2 || ""}
         setInputValue={(e) => setInputValue(e)}
         selectedToken={selectedToken[1]}
         loading={loading}
+        // result={result}
+        result={value2 * price2}
         price2={price2}
         Change={(e) => Change(e)}
         second={true}

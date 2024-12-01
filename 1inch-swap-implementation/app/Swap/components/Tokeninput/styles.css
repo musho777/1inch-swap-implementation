@@ -45,6 +45,10 @@
   color: #6c86ad;
 }
 
+.inputLoading {
+  display: flex;
+}
+
 .result {
   display: flex;
   justify-content: space-between;
