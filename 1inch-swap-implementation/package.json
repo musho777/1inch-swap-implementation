@@ -17,11 +17,15 @@
     "@ethersproject/solidity": "^5.6.1",
     "@ethersproject/units": "^5.6.1",
     "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "axios": "^1.7.8",
     "bignumber.js": "^9.1.2",
+    "ethers": "^6.13.4",
     "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-virtualized": "^9.22.5",
+    "web3": "^4.15.0"
   },
   "devDependencies": {
     "@types/node": "^20",

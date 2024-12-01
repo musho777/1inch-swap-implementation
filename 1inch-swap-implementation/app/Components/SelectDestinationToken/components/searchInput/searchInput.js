@@ -2,8 +2,7 @@
 import './styles.css'
 import { ClearSvg, SearchSvg } from '../../../../utils/svg'
 import { useState } from 'react'
-export const SearchInput = () => {
-  const [value, setValue] = useState("")
+export const SearchInput = ({ value, setValue }) => {
   return <div className="searchInput">
     <div className='searchSvg'>
       <SearchSvg />

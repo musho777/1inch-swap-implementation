@@ -57,8 +57,8 @@
 #countdown>svg>path {
   stroke-dasharray: 65px;
   stroke-dashoffset: 0px;
-  stroke-linecap: round;
-  stroke-width: 2px;
+  strokeLinecap: round;
+  strokeWidth: 2px;
   stroke: white;
   fill: none;
   animation: countdown 8s linear infinite forwards;

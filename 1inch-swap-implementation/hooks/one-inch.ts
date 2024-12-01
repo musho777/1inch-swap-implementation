@@ -7,20 +7,38 @@ import { generate1InchSwapParmas, getSigner } from "@/utils/helpers";
 import isZero from "@/utils/isZero";
 import { BigNumber } from "@ethersproject/bignumber";
 import { useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { useEffect } from "react";
 
+const injected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42], // List of supported networks (Mainnet, Ropsten, Rinkeby, Goerli, Kovan)
+});
 export const useSwap1Inch = () => {
   const chainId = 1;
-  const { account, library } = useWeb3React();
+  const { account, library, activate, deactivate } = useWeb3React();
   const typedValue = 1; // TO DO: get from input
   const router1Inch = ROUTER_ADDRESSES_1INCH[chainId];
+
+  useEffect(() => {
+    connectWallet()
+  }, [activate]);
+
+  const connectWallet = async () => {
+    try {
+      await activate(injected);
+    } catch (error) {
+      console.log("Connection error", error);
+    }
+  };
+
 
   if (!account) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
 
   const to = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address to
-
   const swap1Inch = async () => {
+    console.log("-11")
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const swapParams = generate1InchSwapParmas(
@@ -31,6 +49,7 @@ export const useSwap1Inch = () => {
       1
     );
 
+    console.log(account, '12993')
     const swapTransaction = await buildTxForSwap1Inch(swapParams, chainId);
 
     // TO DO: Remove when change DEV plan for 1Inch (1 Request per second)
@@ -67,6 +86,7 @@ export const useSwap1Inch = () => {
 
       return response;
     } catch (err) {
+      console.log(err)
       console.error(err);
       return;
     }
