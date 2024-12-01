@@ -8,33 +8,25 @@ import isZero from "@/utils/isZero";
 import { BigNumber } from "@ethersproject/bignumber";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { useEffect } from "react";
 
-const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42], // List of supported networks (Mainnet, Ropsten, Rinkeby, Goerli, Kovan)
-});
+
+const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
+
 export const useSwap1Inch = () => {
   const chainId = 1;
   const { account, library, activate, deactivate } = useWeb3React();
+  if (!account) {
+    activate(injected);
+  }
   const typedValue = 1; // TO DO: get from input
   const router1Inch = ROUTER_ADDRESSES_1INCH[chainId];
-
-  useEffect(() => {
-    connectWallet()
-  }, [activate]);
-
-  const connectWallet = async () => {
-    try {
-      await activate(injected);
-    } catch (error) {
-    }
-  };
-
+  console.log(account, '22')
   if (!account) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
 
   const to = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address to
+
   const swap1Inch = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 

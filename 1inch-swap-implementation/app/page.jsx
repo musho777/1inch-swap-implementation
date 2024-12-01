@@ -4,15 +4,20 @@ import SelectDestinationToken from './SelectDestinationToken/index'
 import { useCallback, useEffect, useState } from 'react';
 import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from 'web3'
+import { Web3Provider } from "@ethersproject/providers";
 import { ConnetWallet } from './Components/ConnectWallet/index'
-
+import SwapComponent from './Components/SwapComponent'
 export default function Home() {
-  const getLibrary = (provider) => {
-    if (!provider) {
-      return null;
-    }
-    return new Web3(provider);
-  };
+  // const getLibrary = (provider) => {
+  //   if (!provider) {
+  //     return null;
+  //   }
+  //   return new Web3(provider);
+  // };
+  function getLibrary(provider) {
+    console.log(provider, '2000')
+    return new Web3Provider(provider);
+  }
 
   const [selectedToken, setSelectedToken] = useState([
     {
@@ -133,6 +138,9 @@ export default function Home() {
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
         <ConnetWallet handleClick={() => handleClick()} />
+      </div>
+      <div >
+        <SwapComponent />
       </div>
       <div className='page'>
         {page ?
