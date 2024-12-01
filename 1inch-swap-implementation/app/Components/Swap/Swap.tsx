@@ -4,11 +4,16 @@ import { DownSvg, WalletSvg } from '../../utils/svg'
 import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { SelectToken } from './components/SelectToken/SelectToken'
+import { useCallback, useEffect, useState } from 'react'
 interface SwapProps {
-  setPage: (e: boolean) => void; // Define the type for setPage
+  setPage: (e: boolean) => void;
+  handleClick: () => void;
 }
 
-const Swap = ({ setPage }: SwapProps) => {
+const Swap = ({ setPage, handleClick }: SwapProps) => {
+
+
+
   return <div className='main'>
     <Header />
     <div className='TokeninputWrapper'>
@@ -19,7 +24,7 @@ const Swap = ({ setPage }: SwapProps) => {
       <SelectToken setPage={(e) => setPage(false)} />
     </div>
     <div>
-      <button className='button'>
+      <button onClick={() => handleClick()} className='button'>
         <WalletSvg /> Connect wallet
       </button>
     </div>

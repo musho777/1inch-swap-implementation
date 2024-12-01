@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './styles.css'
 import { Select } from '../select/Select'
 import { SetPage } from '@/app/types/types';
@@ -12,11 +12,38 @@ export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
 
+  const [price, setPrice] = useState(0)
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch("/1inch.dev/price/v1.1/1/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2?currency=USD", {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer oYtJS37LUR9zy6jylTaeVKlpGZrRffE9',
+        },
+      });
+      const result = await response.json();
+      console.log(result, 'result')
+      let value = Object.values(result)[0];
+      setPrice(value)
+    } catch (err) {
+    } finally {
+    }
+  }, []);
+
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  console.log(price, 'price')
+
+
   const handleInputChange = (event: any) => {
     const rawValue = event.target.value;
     const cleanedValue = rawValue.replace(/\D/g, '');
     if (cleanedValue !== '') {
-      const number = Number(cleanedValue) * 4;
+      const number = Number(cleanedValue) * price;
       const formattedResult = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
       setResult(formattedResult);
       const formattedInput = cleanedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
