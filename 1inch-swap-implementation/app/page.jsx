@@ -135,23 +135,27 @@ export default function Home() {
         <ConnetWallet handleClick={() => handleClick()} />
       </div>
       <div className='page'>
-        <Swap
-          GetPrice={() => GetPrice()}
-          loading={loading}
-          price1={price1}
-          price2={price2 ? price2 : 0}
-          setActive={(e) => setActive(e)}
-          selectedToken={selectedToken}
-          handleClick={() => handleClick()}
-          setPage={(e) => setPage(e)}
-          ChangeDirection={() => ChangeDirection()}
-        />
-        {/* <SelectDestinationToken
-          data={data}
-          setSelectedToken={(e) => {
-            Select(e)
-            setPage(true)
-          }} setPage={(e) => setPage(e)} /> */}
+        {page ?
+          <Swap
+            GetPrice={() => GetPrice()}
+            loading={loading}
+            price1={price1}
+            price2={price2 ? price2 : 0}
+            setActive={(e) => setActive(e)}
+            selectedToken={selectedToken}
+            handleClick={() => handleClick()}
+            setPage={(e) => setPage(e)}
+            ChangeDirection={() => ChangeDirection()}
+          /> :
+          <SelectDestinationToken
+            data={data}
+            setSelectedToken={(e) => {
+              Select(e)
+              setPage(true)
+            }}
+            setPage={(e) => setPage(e)}
+          />
+        }
       </div>
     </Web3ReactProvider>
   );

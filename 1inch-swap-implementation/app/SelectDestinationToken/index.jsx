@@ -2,23 +2,23 @@ import './styles.css';
 import { FavouriteToken } from './components/favouriteToken/favouriteToken';
 import { TokenItem } from './components/tokenItem/tokenItem';
 import { BackSvg, ButtonArrow, ClearSvg, SearchSvg } from '@/app/utils/svg';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 
 
 const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
   const [value, setValue] = useState("");
 
-  const tokenItems = useMemo(
-    () =>
-      data.map((elm, index) => {
-        const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
-        return <div onClick={() => setSelectedToken(elm)}>
-          <TokenItem key={`token-${index}`} name={name} logo={logoURI} />
-        </div>
-      }),
-    [data]
-  );
+  const [arr, setArr] = useState([
+    { name: "ETH" },
+    { name: "WETH" },
+    { name: "USDC" },
+    { name: "DAI" },
+    { name: "USDT" },
+    { name: "WBTC" },
+    { name: "1INCH" },
+    { name: "BNB" },
+  ])
 
   return (
     <div className="main" id="selectDestinationToken">
@@ -49,15 +49,23 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
           />
         </div>
         <div className="favouriteTokenWrapper">
-          {Array(7)
-            .fill(null)
-            .map((_, index) => (
-              <FavouriteToken key={index} />
-            ))}
+          {arr.map((elm, index) => (
+            <FavouriteToken name={elm.name} key={index} />
+          ))}
         </div>
       </div>
-      <div className="TokenItemWrapper">
-        {tokenItems}
+      <div key={1} className="TokenItemWrapper">
+        {
+          data.map((elm, index) => {
+            if (index == 2) {
+              console.log(elm)
+            }
+            const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
+            if (elm.eip2612)
+              return <div key={`token-${index}`} onClick={() => setSelectedToken(elm)}>
+                <TokenItem name={name} logo={logoURI} />
+              </div>
+          })}
       </div>
     </div>
   );
