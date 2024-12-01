@@ -6,15 +6,12 @@ export const ConnetWallet = ({ handleClick }) => {
 
 
   async function connectWallet1() {
-    console.log("2030")
-    // Check if Metamask is installed
     if (typeof window.ethereum !== "undefined") {
       try {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
 
-        console.log("Connected accounts:", accounts);
         if (accounts) {
           handleClick()
         }
@@ -22,15 +19,12 @@ export const ConnetWallet = ({ handleClick }) => {
           method: "net_version",
         });
 
-        console.log("Connected network ID:", networkId);
 
         window.ethereum.on("accountsChanged", (newAccounts) => {
-          console.log("Accounts changed:", newAccounts);
           handleClick()
         });
 
         window.ethereum.on("chainChanged", (chainId) => {
-          console.log("Network changed:", chainId);
           handleClick()
         });
 

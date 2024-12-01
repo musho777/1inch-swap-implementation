@@ -6,9 +6,10 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 
 interface SwapProps {
   setPage: (e: boolean) => void;
+  setSelectedToken: any
 }
 
-const SelectDestinationToken = ({ setPage }: SwapProps) => {
+const SelectDestinationToken = ({ setPage, setSelectedToken }: SwapProps) => {
   const [data, setData] = useState<any[]>([]);
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -75,7 +76,9 @@ const SelectDestinationToken = ({ setPage }: SwapProps) => {
     () =>
       data.map((elm: any, index: number) => {
         const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
-        return <TokenItem key={`token-${index}`} name={name} logo={logoURI} />;
+        return <div onClick={() => setSelectedToken(elm)}>
+          <TokenItem key={`token-${index}`} name={name} logo={logoURI} />
+        </div>
       }),
     [data]
   );

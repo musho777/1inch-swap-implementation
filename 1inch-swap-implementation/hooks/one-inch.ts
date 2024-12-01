@@ -31,14 +31,15 @@ export const useSwap1Inch = () => {
     }
   };
 
-
+  console.log(account, 'account')
   if (!account) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
 
   const to = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address to
+  console.log(to, 'to')
   const swap1Inch = async () => {
-    console.log("-11")
+    console.log("-----")
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const swapParams = generate1InchSwapParmas(
@@ -49,7 +50,6 @@ export const useSwap1Inch = () => {
       1
     );
 
-    console.log(account, '12993')
     const swapTransaction = await buildTxForSwap1Inch(swapParams, chainId);
 
     // TO DO: Remove when change DEV plan for 1Inch (1 Request per second)

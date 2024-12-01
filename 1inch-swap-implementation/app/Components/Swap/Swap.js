@@ -5,22 +5,39 @@ import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { SelectToken } from './components/SelectToken/SelectToken'
 import { useEffect, useState } from 'react'
+import { useSwap1Inch } from '@/hooks/one-inch'
 
 const Swap = ({ setPage, handleClick }) => {
+
+  const { swap1Inch } = useSwap1Inch() || {};
+
+  const handleSwap = async () => {
+    try {
+      const response = await swap1Inch();
+      // Handle the response, e.g., show the transaction hash or success message to the user
+    } catch (error) {
+      console.error("Swap failed:", error);
+      // Handle error, e.g., show error message to the user
+    }
+  };
+
+  useEffect(() => {
+    handleSwap()
+  }, [])
+
+
   const [connected, setConnected] = useState()
   async function connectWallet1() {
     if (typeof window.ethereum !== "undefined") {
       try {
         window.ethereum.request({ method: 'eth_requestAccounts' })
           .then(accounts => {
-            console.log(accounts, '20000-')
             if (accounts.length > 0) {
               setConnected(true)
             } else {
             }
           })
           .catch(error => {
-            console.log(accounts, '20000-')
           });
       } catch (error) {
         setConnected(false)
@@ -42,7 +59,8 @@ const Swap = ({ setPage, handleClick }) => {
       <div className='swapDirectionArrow'>
         <DownSvg />
       </div>
-      <SelectToken setPage={(e) => setPage(false)} />
+      <Tokeninput setPage={(e) => setPage(false)} />
+      {/* <SelectToken setPage={(e) => setPage(false)} /> */}
     </div>
     <div>
       {connected ?

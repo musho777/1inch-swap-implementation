@@ -9,12 +9,11 @@ import { ConnetWallet } from './Components/ConnectWallet/index'
 export default function Home() {
   const getLibrary = (provider: any) => {
     if (!provider) {
-      console.error("Provider is not available");
       return null;
     }
     return new Web3(provider);
   };
-
+  const [SelectedToken, setSelectedToken] = useState()
 
 
   const [page, setPage] = useState(true)
@@ -25,7 +24,6 @@ export default function Home() {
     setIsVisible(!isVisible)
   };
 
-
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
@@ -34,7 +32,7 @@ export default function Home() {
       <div className='page'>
         {page ?
           <Swap handleClick={() => handleClick()} setPage={(e) => setPage(e)} /> :
-          <SelectDestinationToken setPage={(e) => setPage(e)} />
+          <SelectDestinationToken setSelectedToken={(e) => setSelectedToken(e)} setPage={(e) => setPage(e)} />
         }
       </div>
     </Web3ReactProvider>
