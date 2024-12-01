@@ -147,3 +147,11 @@ a {
   z-index: 22 !important;
   /* display: block !important; */
 }
+
+.op1 {
+  opacity: 1 !important;
+}
+
+.op0 {
+  opacity: 0 !important;
+}

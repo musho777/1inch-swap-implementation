@@ -33,7 +33,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/Components/Swap/components/Tokeninput/Tokeninput.js",
-    "app/page.jsx"
+    "app/page.jsx",
+    "app/SelectDestinationToken/index.jsx"
   ],
   "exclude": [
     "node_modules"

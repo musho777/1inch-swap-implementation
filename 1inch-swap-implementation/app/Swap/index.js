@@ -1,12 +1,15 @@
 "use client"
 import './styles.css'
-import { DownSvg, WalletSvg } from '../../utils/svg'
 import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { useEffect, useState } from 'react'
+import { DownSvg, WalletSvg } from '../utils/svg'
 
-const Swap = ({ setPage, handleClick, selectedToken, selectedToken1, setActive }) => {
+const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }) => {
   const [connected, setConnected] = useState()
+  const [inputValue, setInputValue] = useState("");
+  const [res, setRes] = useState(0)
+
   async function connectWallet1() {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -27,25 +30,50 @@ const Swap = ({ setPage, handleClick, selectedToken, selectedToken1, setActive }
     }
   }
 
+
+
+
   useEffect(() => {
     connectWallet1()
   }, [])
 
+  useEffect(() => {
+    if (price1 && price2) {
+      setRes(price1 / price2)
+    }
+  }, [price1, price2])
+
+  const Change = (e) => {
+    console.log(e, '1111')
+    setRes(price1 / price2 * e)
+  }
+
+  console.log(res)
 
   return <div className='main'>
     <Header />
     <div className='TokeninputWrapper'>
-      <Tokeninput selectedToken={selectedToken[0]} setPage={(e) => {
-        setPage(false)
-        setActive(0)
-      }} />
+      <Tokeninput
+        inputValue={inputValue}
+        setInputValue={(e) => setInputValue(e)}
+        price={price1}
+        Change={(e) => Change(e)}
+        selectedToken={selectedToken[0]}
+        setPage={(e) => {
+          setPage(false)
+          setActive(0)
+        }} />
       <div className='swapDirectionArrow'>
         <DownSvg />
       </div>
-      <Tokeninput selectedToken={selectedToken[1]} second={true} setPage={(e) => {
-        setPage(false)
-        setActive(1)
-      }} />
+      <Tokeninput
+        res={res}
+        selectedToken={selectedToken[1]}
+        second={true}
+        setPage={(e) => {
+          setPage(false)
+          setActive(1)
+        }} />
     </div>
     <div>
       {connected ?

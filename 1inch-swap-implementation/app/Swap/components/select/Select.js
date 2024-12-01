@@ -1,4 +1,4 @@
-import { ArrowSvg } from "../../../../utils/svg"
+import { ArrowSvg } from '@/app/utils/svg'
 
 export const Select = ({ setPage, img }) => {
   return <div onClick={() => setPage(false)} className='selectWrapper'>

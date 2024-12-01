@@ -1,5 +1,5 @@
+import { PinIcon } from '@/app/utils/svg'
 import './styles.css'
-import { PinIcon } from '../../../../utils/svg'
 export const TokenItem = ({ logo, name }) => {
   return <div className='tokenItem'>
     <div className='tokenItemImg'>
