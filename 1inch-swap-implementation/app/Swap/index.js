@@ -3,12 +3,13 @@ import './styles.css'
 import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { useEffect, useState } from 'react'
-import { DownSvg, WalletSvg } from '../utils/svg'
+import { ArrowIcon, DownSvg, Gasolin, WalletSvg } from '../utils/svg'
 
 const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }) => {
   const [connected, setConnected] = useState()
   const [inputValue, setInputValue] = useState("");
   const [res, setRes] = useState(0)
+  const [value, setValue] = useState(1)
 
   async function connectWallet1() {
     if (typeof window.ethereum !== "undefined") {
@@ -38,17 +39,18 @@ const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }
   }, [])
 
   useEffect(() => {
-    if (price1 && price2) {
-      setRes(price1 / price2)
+    if (price2 == 0) {
+      setRes(0)
+    }
+    else {
+      setRes(value * price1 / price2)
     }
   }, [price1, price2])
 
   const Change = (e) => {
-    console.log(e, '1111')
+    setValue(e)
     setRes(price1 / price2 * e)
   }
-
-  console.log(res)
 
   return <div className='main'>
     <Header />
@@ -74,6 +76,18 @@ const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }
           setPage(false)
           setActive(1)
         }} />
+    </div>
+    <div className='accardion'>
+      <div className='accardionItem'>
+        <div className='valuesWrapper'>
+          <p>1 Baby Doge <span>=</span> 0.000000000000770732  <span>~$0</span> </p>
+        </div>
+        <div className='valuesWrapper'>
+          <Gasolin />
+          <p><span>~$16.26</span></p>
+          <ArrowIcon />
+        </div>
+      </div>
     </div>
     <div>
       {connected ?

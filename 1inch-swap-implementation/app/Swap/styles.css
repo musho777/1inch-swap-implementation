@@ -85,3 +85,29 @@
 .selectButton:hover #SVGRepo_iconCarrier>path {
   stroke: white;
 }
+
+.accardion {
+  background-color: rgba(6, 10, 16, .5);
+  border-radius: 16px;
+  margin-top: 8px;
+  padding: 14px 16px !important;
+}
+
+.accardionItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.valuesWrapper>p {
+  font-size: 13px;
+}
+
+.valuesWrapper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.valuesWrapper>p>span {
+  color: #6c86ad !important;
+}
