@@ -23,7 +23,11 @@
   cursor: pointer;
 }
 
-
+#connectedButton {
+  background-color: #324054 !important;
+  color: #6c86ad !important;
+  cursor: default !important;
+}
 
 .button:hover {
   background-color: rgb(47 138 245 / 24%);
