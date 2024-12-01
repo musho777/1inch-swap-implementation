@@ -22,11 +22,8 @@ export async function buildTxForSwap1Inch(
     create1InchProxyUrl(`/swap/v6.0/${chainId}/swap`),
     swapParams
   );
-  console.log(url)
   try {
-    console.log(create1InchProxyUrl(`/swap/v6.0/${chainId}/swap`),)
     const response = await axios1Inch.get(url);
-    console.log(oneInchBaseUrl, 'response', response)
     return response.data.tx;
   } catch (err) {
     console.error(err);

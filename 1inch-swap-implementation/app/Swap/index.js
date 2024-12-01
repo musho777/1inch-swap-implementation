@@ -63,7 +63,6 @@ const Swap = ({
     setValue2(e * kayf)
     setResult(e * price1)
   }
-  console.log(result)
   return <div className='main'>
     <Header GetPrice={() => GetPrice()} />
     <div className='TokeninputWrapper'>

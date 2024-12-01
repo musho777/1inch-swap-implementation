@@ -8,7 +8,6 @@ const SwapComponent = () => {
     try {
       const result = await swap1Inch();
       if (result) {
-        console.log("Swap successful:", result);
       } else {
         console.error("Swap failed or cancelled.");
       }

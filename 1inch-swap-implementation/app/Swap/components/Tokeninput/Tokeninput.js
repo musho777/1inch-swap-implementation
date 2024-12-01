@@ -25,7 +25,6 @@ export const Tokeninput = ({
     if (!second) {
       Change(Number(cleanedValue))
     }
-    console.log(cleanedValue, '2')
     if (cleanedValue !== '') {
       const formattedInput = cleanedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
       setInputValue(formattedInput);

@@ -27,19 +27,15 @@ export const useSwap1Inch = () => {
     try {
       await activate(injected);
     } catch (error) {
-      console.log("Connection error", error);
     }
   };
 
-  console.log(account, 'account')
   if (!account) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
 
   const to = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address to
-  console.log(to, 'to')
   const swap1Inch = async () => {
-    console.log("-----")
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const swapParams = generate1InchSwapParmas(
@@ -86,7 +82,6 @@ export const useSwap1Inch = () => {
 
       return response;
     } catch (err) {
-      console.log(err)
       console.error(err);
       return;
     }
