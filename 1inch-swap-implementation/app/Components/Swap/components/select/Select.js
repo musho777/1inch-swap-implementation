@@ -1,9 +1,9 @@
 import { ArrowSvg } from "../../../../utils/svg"
 
-export const Select = ({ setPage }) => {
+export const Select = ({ setPage, img }) => {
   return <div onClick={() => setPage(false)} className='selectWrapper'>
     <div className='selectWrapperImg'>
-      <img src='https://tokens.1inch.io/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png' />
+      <img src={img} />
       <div className='network_logo'>
         <img src='https://tokens.1inch.io/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png' />
       </div>

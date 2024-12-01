@@ -2,19 +2,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import './styles.css'
 import { Select } from '../select/Select'
-import { SetPage } from '@/app/types/types';
+import { ButtonArrow } from '@/app/utils/svg';
 
-interface TokeninputProps {
-  setPage: SetPage;
-}
-export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
-
+export const Tokeninput = ({ setPage, second, selectedToken }) => {
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
-  let token1 = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
   let token2 = "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB"
   const [price, setPrice] = useState(0)
-  const fetchData = useCallback(async (token: any) => {
+  const fetchData = useCallback(async (token) => {
     try {
       const response = await fetch(`/1inch.dev/price/v1.1/1/${token}?currency=USD`, {
         method: 'GET',
@@ -33,12 +28,11 @@ export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
 
 
   useEffect(() => {
-    // fetchData(token1)
     fetchData(token2)
   }, [])
 
 
-  const handleInputChange = (event: any) => {
+  const handleInputChange = (event) => {
     const rawValue = event.target.value;
     const cleanedValue = rawValue.replace(/\D/g, '');
     if (cleanedValue !== '') {
@@ -53,11 +47,20 @@ export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
     }
   }
 
-  return <div className='tokeninput'>
-    <p className='font13'>You pay</p>
+  return <div id={second ? "tokeninput" : ""} className='tokeninput'>
+    {selectedToken && <p className='font13'>You pay</p>}
     <div className='inputwrapper'>
-      <Select setPage={() => setPage(false)} />
+      {!selectedToken ?
+        <div className='selectTokenDiv'>
+          <button onClick={(e) => setPage(true)} className='selectButton'>
+            Select a token
+            <ButtonArrow />
+          </button>
+        </div> :
+        <Select img={selectedToken?.logoURI} setPage={() => setPage(false)} />
+      }
       <input
+        disabled={second}
         maxLength={19}
         className='input'
         value={inputValue}
@@ -65,7 +68,7 @@ export const Tokeninput: React.FC<TokeninputProps> = ({ setPage }) => {
       />
     </div>
     <div className='result'>
-      <p id="selectedName">Ether</p>
+      <p id="selectedName">{selectedToken?.name}</p>
       {result && <p>~${result}</p>}
     </div>
   </div>

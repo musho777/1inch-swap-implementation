@@ -13,6 +13,11 @@
   justify-content: space-between;
 }
 
+#tokeninput {
+  background-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #202835 !important;
+}
+
 .font13 {
   white-space: nowrap;
   overflow: hidden;

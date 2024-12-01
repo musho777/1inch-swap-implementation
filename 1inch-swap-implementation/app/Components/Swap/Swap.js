@@ -3,29 +3,9 @@ import './styles.css'
 import { DownSvg, WalletSvg } from '../../utils/svg'
 import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
-import { SelectToken } from './components/SelectToken/SelectToken'
 import { useEffect, useState } from 'react'
-import { useSwap1Inch } from '@/hooks/one-inch'
 
-const Swap = ({ setPage, handleClick }) => {
-
-  const { swap1Inch } = useSwap1Inch() || {};
-
-  const handleSwap = async () => {
-    try {
-      const response = await swap1Inch();
-      // Handle the response, e.g., show the transaction hash or success message to the user
-    } catch (error) {
-      console.error("Swap failed:", error);
-      // Handle error, e.g., show error message to the user
-    }
-  };
-
-  useEffect(() => {
-    handleSwap()
-  }, [])
-
-
+const Swap = ({ setPage, handleClick, selectedToken, selectedToken1, setActive }) => {
   const [connected, setConnected] = useState()
   async function connectWallet1() {
     if (typeof window.ethereum !== "undefined") {
@@ -55,12 +35,17 @@ const Swap = ({ setPage, handleClick }) => {
   return <div className='main'>
     <Header />
     <div className='TokeninputWrapper'>
-      <Tokeninput setPage={(e) => setPage(false)} />
+      <Tokeninput selectedToken={selectedToken[0]} setPage={(e) => {
+        setPage(false)
+        setActive(0)
+      }} />
       <div className='swapDirectionArrow'>
         <DownSvg />
       </div>
-      <Tokeninput setPage={(e) => setPage(false)} />
-      {/* <SelectToken setPage={(e) => setPage(false)} /> */}
+      <Tokeninput selectedToken={selectedToken[1]} second={true} setPage={(e) => {
+        setPage(false)
+        setActive(1)
+      }} />
     </div>
     <div>
       {connected ?
