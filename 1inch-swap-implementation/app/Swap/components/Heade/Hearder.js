@@ -1,12 +1,13 @@
 import './styles.css'
 import { Refresh, FiltrSvg } from '@/app/utils/svg'
 import { useState } from 'react';
-export const Header = () => {
+export const Header = ({ GetPrice }) => {
 
   const [isRotating, setIsRotating] = useState(false);
 
   const handleClick = () => {
     setIsRotating(true);
+    GetPrice()
     setTimeout(() => setIsRotating(false), 700);
   };
 

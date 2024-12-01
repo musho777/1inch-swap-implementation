@@ -1,6 +1,6 @@
 import { ArrowSvg } from '@/app/utils/svg'
 
-export const Select = ({ setPage, img }) => {
+export const Select = ({ setPage, img, name }) => {
   return <div onClick={() => setPage(false)} className='selectWrapper'>
     <div className='selectWrapperImg'>
       <img src={img} />
@@ -10,7 +10,7 @@ export const Select = ({ setPage, img }) => {
     </div>
     <div className='selectItem'>
       <div >
-        <p>ETH</p>
+        <p>{name}</p>
         <ArrowSvg />
       </div>
       <p>on Ethereum</p>

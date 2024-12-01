@@ -1,21 +1,40 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.css'
 import { Select } from '../select/Select'
 import { ButtonArrow } from '@/app/utils/svg';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-export const Tokeninput = ({ setPage, second, selectedToken, Change, price, res }) => {
+export const Tokeninput = ({
+  setPage,
+  second,
+  selectedToken,
+  Change,
+  price,
+  loading,
+  res,
+  price2
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
 
   const handleInputChange = (event) => {
-    const rawValue = event?.target?.value;
+    const rawValue = event;
     const cleanedValue = rawValue.replace(/\D/g, '');
-    Change(Number(cleanedValue))
+    sessionStorage.setItem("value", rawValue)
+    if (!second) {
+      Change(Number(cleanedValue))
+    }
     if (cleanedValue !== '') {
       const number = Number(cleanedValue) * price;
+      const formattedNumber = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(number);
 
-      const formattedResult = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      const formattedResult = formattedNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
       setResult(formattedResult);
       const formattedInput = cleanedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
       setInputValue(formattedInput);
@@ -23,6 +42,24 @@ export const Tokeninput = ({ setPage, second, selectedToken, Change, price, res 
       setResult('');
       setInputValue('');
     }
+  }
+
+  useEffect(() => {
+    const sessionValue = sessionStorage.getItem('value');
+    if (sessionValue) {
+      handleInputChange(sessionValue)
+    }
+  }, [price])
+
+  const Price = (number) => {
+    const formattedNumber = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number);
+    if (number > 0) {
+      return `~$${formattedNumber.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}`
+    }
+    return
   }
 
 
@@ -36,19 +73,30 @@ export const Tokeninput = ({ setPage, second, selectedToken, Change, price, res 
             <ButtonArrow />
           </button>
         </div> :
-        <Select img={selectedToken?.logoURI} setPage={() => setPage(false)} />
+        <Select name={selectedToken.symbol} img={selectedToken?.logoURI} setPage={() => setPage(false)} />
       }
-      <input
-        disabled={second}
-        maxLength={19}
-        className='input'
-        value={!second ? inputValue : res}
-        onChange={handleInputChange}
-      />
+      <div>
+        {(loading && selectedToken) ?
+          <Skeleton width={"200px"} baseColor="#202020" highlightColor="#444" /> :
+          <input
+            disabled={second}
+            maxLength={19}
+            className='input'
+            value={!second ? inputValue : res}
+            onChange={(e) => handleInputChange(e.target.value)}
+          />
+        }
+      </div>
     </div>
-    <div className='result'>
+    {selectedToken && !second && <div className='result'>
       <p id="selectedName">{selectedToken?.name}</p>
       {result && <p>~${result}</p>}
-    </div>
+    </div>}
+    {selectedToken && second &&
+      <div className='result'>
+        <p id="selectedName">{selectedToken?.name}</p>
+        {<p>{Price((price2 * res))}</p>}
+      </div>
+    }
   </div>
 }

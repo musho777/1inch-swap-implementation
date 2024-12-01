@@ -68,7 +68,7 @@ export const ButtonArrow = ({ color = "#2f8af5" }) => {
 
 
 export const DownSvg = () => {
-  return <svg width="24" height="12" style={{ transform: 'rotate(180deg)', marginTop: 2 }} >
+  return <svg width="24" height="12" style={{ transform: 'rotate(180deg)', marginTop: 7 }} >
     <path d="M12 2L12 22M12 2L8 6M12 2L16 6" stroke="#44556f" strokeWidth="2" strokeLinecap="round" />
   </svg>
 }

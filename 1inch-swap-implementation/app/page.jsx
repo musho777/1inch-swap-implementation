@@ -33,13 +33,34 @@ export default function Home() {
         "native",
         "PEG:ETH"
       ]
-    }],
-    {}
-  )
+    },
+    {
+      address: "0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790",
+      chainId: 1,
+      decimals: 18,
+      eip2612: false,
+      isFoT: true,
+      logoURI: "https://tokens-data.1inch.io/images/1/0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790.png",
+      name: "PeiPei",
+      providers: [
+        "1inch",
+        "CoinGecko",
+        "Kleros Tokens"
+      ],
+      symbol: "PEIPEI",
+      tags: [
+        "tokens"
+      ]
+    }
+  ])
   const [active, setActive] = useState(1)
   const [page, setPage] = useState(true)
   const [data, setData] = useState([]);
-  const [prices, setPrices] = useState(0)
+  const [prices, setPrices] = useState(1)
+  const [price1, setPrice1] = useState()
+  const [price2, setPrice2] = useState()
+
+  const [loading, setLoading] = useState(false)
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -54,9 +75,10 @@ export default function Home() {
   }
 
 
+  console.log(selectedToken[1])
 
-
-  const GetPrice = async (token, type) => {
+  const GetPrice = async () => {
+    setLoading(true)
     try {
       const response = await fetch(`/1inch.dev/price/v1.1/1?currency=USD`, {
         method: 'GET',
@@ -66,6 +88,8 @@ export default function Home() {
         },
       });
       const result = await response.json();
+      console.log(result, 'result')
+      setLoading(false)
       setPrices(result)
     } catch (err) {
     } finally {
@@ -94,6 +118,19 @@ export default function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log("++++++++++++")
+    setPrice1(prices[selectedToken[0]?.address])
+    setPrice2(prices[selectedToken[1]?.address])
+  }, [prices, selectedToken[1]?.address])
+
+  const ChangeDirection = () => {
+    let item = [
+      selectedToken[1],
+      selectedToken[0]
+    ]
+    setSelectedToken(item)
+  }
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
@@ -102,19 +139,22 @@ export default function Home() {
       </div>
       <div className='page'>
         <Swap
-          price1={prices[selectedToken[0]?.address]}
-          price2={prices[selectedToken[1]?.address] ? prices[selectedToken[1]?.address] : 0}
+          GetPrice={() => GetPrice()}
+          loading={loading}
+          price1={price1}
+          price2={price2 ? price2 : 0}
           setActive={(e) => setActive(e)}
           selectedToken={selectedToken}
           handleClick={() => handleClick()}
           setPage={(e) => setPage(e)}
+          ChangeDirection={() => ChangeDirection()}
         />
-        <SelectDestinationToken
+        {/* <SelectDestinationToken
           data={data}
           setSelectedToken={(e) => {
             Select(e)
             setPage(true)
-          }} setPage={(e) => setPage(e)} />
+          }} setPage={(e) => setPage(e)} /> */}
       </div>
     </Web3ReactProvider>
   );

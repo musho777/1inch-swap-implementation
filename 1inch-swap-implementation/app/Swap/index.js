@@ -5,11 +5,22 @@ import { Header } from './components/Heade/Hearder'
 import { useEffect, useState } from 'react'
 import { ArrowIcon, DownSvg, Gasolin, WalletSvg } from '../utils/svg'
 
-const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }) => {
+const Swap = ({
+  setPage,
+  handleClick,
+  selectedToken,
+  setActive,
+  price1,
+  price2,
+  loading,
+  GetPrice,
+  ChangeDirection
+}) => {
   const [connected, setConnected] = useState()
   const [inputValue, setInputValue] = useState("");
   const [res, setRes] = useState(0)
   const [value, setValue] = useState(1)
+  const [isRotated, setIsRotated] = useState(false);
 
   async function connectWallet1() {
     if (typeof window.ethereum !== "undefined") {
@@ -34,6 +45,7 @@ const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }
 
 
 
+
   useEffect(() => {
     connectWallet1()
   }, [])
@@ -43,6 +55,7 @@ const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }
       setRes(0)
     }
     else {
+      console.log(price1, price2)
       setRes(value * price1 / price2)
     }
   }, [price1, price2])
@@ -51,26 +64,41 @@ const Swap = ({ setPage, handleClick, selectedToken, setActive, price1, price2 }
     setValue(e)
     setRes(price1 / price2 * e)
   }
-
   return <div className='main'>
-    <Header />
+    <Header GetPrice={() => GetPrice()} />
     <div className='TokeninputWrapper'>
       <Tokeninput
         inputValue={inputValue}
         setInputValue={(e) => setInputValue(e)}
         price={price1}
+        length={false}
         Change={(e) => Change(e)}
         selectedToken={selectedToken[0]}
         setPage={(e) => {
           setPage(false)
           setActive(0)
         }} />
-      <div className='swapDirectionArrow'>
+      <div
+        style={{
+          display: "inline-block",
+          cursor: "pointer",
+          transform: isRotated ? "rotate(180deg)" : "rotate(0deg)",
+          transition: "transform 0.3s ease",
+        }}
+        onClick={() => {
+          ChangeDirection()
+          setIsRotated(!isRotated)
+        }}
+        className='swapDirectionArrow'
+      >
         <DownSvg />
       </div>
       <Tokeninput
-        res={res}
+        res={(res && res != 'Infinity') ? res : ""}
         selectedToken={selectedToken[1]}
+        loading={loading}
+        price2={price2}
+        Change={(e) => Change(e)}
         second={true}
         setPage={(e) => {
           setPage(false)
