@@ -55,7 +55,6 @@ const Swap = ({
       setRes(0)
     }
     else {
-      console.log(price1, price2)
       setRes(value * price1 / price2)
     }
   }, [price1, price2])
@@ -87,6 +86,8 @@ const Swap = ({
         }}
         onClick={() => {
           ChangeDirection()
+          setInputValue(res)
+          setRes(res * 3)
           setIsRotated(!isRotated)
         }}
         className='swapDirectionArrow'
@@ -95,6 +96,8 @@ const Swap = ({
       </div>
       <Tokeninput
         res={(res && res != 'Infinity') ? res : ""}
+        inputValue={inputValue}
+        setInputValue={(e) => setInputValue(e)}
         selectedToken={selectedToken[1]}
         loading={loading}
         price2={price2}

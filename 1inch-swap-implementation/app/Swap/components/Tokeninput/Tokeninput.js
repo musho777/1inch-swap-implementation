@@ -14,9 +14,11 @@ export const Tokeninput = ({
   price,
   loading,
   res,
-  price2
+  price2,
+  inputValue,
+  setInputValue
 }) => {
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("")
 
   const handleInputChange = (event) => {
@@ -46,7 +48,7 @@ export const Tokeninput = ({
 
   useEffect(() => {
     const sessionValue = sessionStorage.getItem('value');
-    if (sessionValue) {
+    if (sessionValue && !inputValue) {
       handleInputChange(sessionValue)
     }
   }, [price])
@@ -64,7 +66,7 @@ export const Tokeninput = ({
 
 
   return <div id={second ? "tokeninput" : ""} className='tokeninput'>
-    {selectedToken && <p className='font13'>You pay</p>}
+    {selectedToken && <p className='font13'>{!second ? "You pay" : "You receive"}</p>}
     <div className='inputwrapper'>
       {!selectedToken ?
         <div className='selectTokenDiv'>
