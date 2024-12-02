@@ -137,11 +137,11 @@ export default function Home() {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
-        <ConnetWallet handleClick={() => handleClick()} />
+        <ConnetWallet isVisible={isVisible} handleClick={() => handleClick()} />
       </div>
-      {/* <div >
-        <SwapComponent />
-      </div> */}
+      <div >
+        {/* <SwapComponent /> */}
+      </div>
       <div className='page'>
         {page ?
           <Swap

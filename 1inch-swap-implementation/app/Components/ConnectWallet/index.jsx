@@ -2,38 +2,39 @@ import { ClearSvg, Logo, MetaMask, WalletSvg } from '@/app/utils/svg'
 import './styles.css'
 import { ethers } from "ethers";
 
-export const ConnetWallet = ({ handleClick }) => {
+export const ConnetWallet = ({ handleClick, isVisible }) => {
 
 
   async function connectWallet1() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
+    if (isVisible)
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
 
-        if (accounts) {
-          handleClick()
+          if (accounts) {
+            handleClick()
+          }
+          const networkId = await window.ethereum.request({
+            method: "net_version",
+          });
+
+
+          window.ethereum.on("accountsChanged", (newAccounts) => {
+            handleClick()
+          });
+
+          window.ethereum.on("chainChanged", (chainId) => {
+            handleClick()
+          });
+
+        } catch (error) {
+          console.error("Connection failed:", error);
         }
-        const networkId = await window.ethereum.request({
-          method: "net_version",
-        });
-
-
-        window.ethereum.on("accountsChanged", (newAccounts) => {
-          handleClick()
-        });
-
-        window.ethereum.on("chainChanged", (chainId) => {
-          handleClick()
-        });
-
-      } catch (error) {
-        console.error("Connection failed:", error);
+      } else {
+        console.error("Metamask is not installed. Please install it to continue.");
       }
-    } else {
-      console.error("Metamask is not installed. Please install it to continue.");
-    }
   }
 
 

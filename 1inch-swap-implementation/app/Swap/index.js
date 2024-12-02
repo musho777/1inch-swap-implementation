@@ -53,9 +53,9 @@ const Swap = ({
 
 
 
-  useEffect(() => {
-    connectWallet1()
-  }, [])
+  // useEffect(() => {
+  //   connectWallet1()
+  // }, [])
 
 
   const Change = (e) => {
