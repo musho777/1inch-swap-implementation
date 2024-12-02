@@ -77,6 +77,7 @@ export default function Home() {
   const Select = (e) => {
     let item = [...selectedToken]
     item[active] = e
+    GetPrice(selectedNetwork[active].id, e.address, active)
     setSelectedToken(item)
   }
 
@@ -94,7 +95,7 @@ export default function Home() {
       });
       const result = await response.json();
       setLoading(false)
-      if (type == 1) {
+      if (type == 0) {
         setPrice1(Object.values(result))
       }
       else {
@@ -174,11 +175,11 @@ export default function Home() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      GetPrice(selectedNetwork[0].id, selectedToken[0]?.address, 1)
+      GetPrice(selectedNetwork[0].id, selectedToken[0]?.address, 0)
     }, 1000);
     const timeout2 = setTimeout(() => {
       if (selectedToken[1]?.address) {
-        GetPrice(selectedNetwork[1].id, selectedToken[1]?.address, 2)
+        GetPrice(selectedNetwork[1].id, selectedToken[1]?.address, 1)
       }
     }, 3000);
     const timeout3 = setTimeout(() => {
@@ -194,10 +195,7 @@ export default function Home() {
 
 
   const ChangeDirection = () => {
-    let item = [
-      selectedToken[1],
-      selectedToken[0]
-    ]
+    let item = [selectedToken[1], selectedToken[0]]
     setSelectedToken(item)
   }
 
