@@ -47,6 +47,7 @@
 
 .inputLoading {
   display: flex;
+  align-items: center;
 }
 
 .result {
@@ -75,6 +76,10 @@
 
 .selectWrapper:hover {
   background-color: #131823;
+}
+
+#selectWrapper:hover {
+  background-color: #06070a !important;
 }
 
 .input {
