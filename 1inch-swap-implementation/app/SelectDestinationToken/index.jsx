@@ -61,7 +61,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
               console.log(elm)
             }
             const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
-            if (elm.eip2612)
+            if (elm.isFoT)
               return <div key={`token-${index}`} onClick={() => setSelectedToken(elm)}>
                 <TokenItem name={name} logo={logoURI} />
               </div>

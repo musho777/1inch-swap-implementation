@@ -49,7 +49,7 @@ export default function Home() {
       ]
     }
   ])
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(0)
   const [page, setPage] = useState(true)
   const [data, setData] = useState([]);
   const [prices, setPrices] = useState(1)
@@ -113,9 +113,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    console.log(prices[selectedToken[1]?.address])
     setPrice1(prices[selectedToken[0]?.address])
     setPrice2(prices[selectedToken[1]?.address])
-  }, [prices, selectedToken[1]?.address])
+  }, [prices, selectedToken[1]?.address, selectedToken[0]?.address])
 
   const ChangeDirection = () => {
     let item = [
