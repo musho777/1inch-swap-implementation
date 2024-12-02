@@ -130,3 +130,10 @@
   transition: 700ms;
   z-index: 9999;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}

@@ -4,11 +4,12 @@ import { TokenItem } from './components/tokenItem/tokenItem';
 import { BackSvg, ButtonArrow, ClearSvg, SearchSvg } from '@/app/utils/svg';
 import { useEffect, useState } from 'react';
 import { SelectNetWork } from '../Components/SelectNetwork/index'
-
+import ReactLoading from 'react-loading';
 
 const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
   const [value, setValue] = useState("");
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [netWork, setNetwork] = useState({
     img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
@@ -27,6 +28,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
       });
       const result = await response.json();
       setData(result || []);
+      setLoading(false)
     } catch (err) {
     }
   };
@@ -90,7 +92,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
           ))}
         </div>
       </div>
-      <div key={1} className="TokenItemWrapper">
+      {!loading ? <div key={1} className="TokenItemWrapper">
         {
           Object.entries(data).map(([address, elm]) => {
             const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
@@ -98,7 +100,11 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
               <TokenItem name={name} logo={logoURI} />
             </div>
           })}
-      </div>
+      </div> :
+        <div className='loading'>
+          <ReactLoading type={"spin"} color={"white"} height={30} width={30} />
+        </div>
+      }
     </div>
   );
 };

@@ -53,7 +53,7 @@ export default function Home() {
   const [page, setPage] = useState(true)
   const [price1, setPrice1] = useState()
   const [price2, setPrice2] = useState()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
@@ -80,11 +80,11 @@ export default function Home() {
         },
       });
       const result = await response.json();
-      setLoading(false)
       if (type == 0) {
         setPrice1(Object.values(result))
       }
       else {
+        setLoading(false)
         setPrice2(Object.values(result))
       }
     } catch (err) {

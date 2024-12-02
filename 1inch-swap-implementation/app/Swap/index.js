@@ -87,10 +87,10 @@ const Swap = ({
           setActive(1)
         }} />
     </div>
-    <div className='accardion'>
+    {/* <div className='accardion'>
       <div className='accardionItem'>
         <div className='valuesWrapper'>
-          <p>1 Baby Doge <span>=</span> 0.000000000000770732  <span>~$0</span> </p>
+          <p>1 Baby Doge <span>=</span> 0.000000000000770732 <span>~$0</span> </p>
         </div>
         <div className='valuesWrapper'>
           <Gasolin />
@@ -98,7 +98,7 @@ const Swap = ({
           <ArrowIcon />
         </div>
       </div>
-    </div>
+    </div> */}
     <div>
       {connected ?
         <button disabled id='connectedButton' className='button'>
