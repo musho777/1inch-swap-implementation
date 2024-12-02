@@ -68,6 +68,7 @@
   margin-left: -8px;
   border-radius: 12px;
   cursor: pointer;
+  align-items: center;
 }
 
 #selectedName:hover {
@@ -100,6 +101,7 @@
 
 .selectWrapperImg {
   position: relative;
+  height: 35px;
 }
 
 .network_logo {
@@ -119,4 +121,14 @@
 .network_logo>img {
   width: 15px;
   height: 15px;
+}
+
+@media (max-width: 480px) {
+  .input {
+    width: 100%;
+  }
+
+  .selectItem>p {
+    width: 70px;
+  }
 }

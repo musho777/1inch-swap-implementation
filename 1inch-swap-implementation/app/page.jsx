@@ -139,9 +139,9 @@ export default function Home() {
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
         <ConnetWallet handleClick={() => handleClick()} />
       </div>
-      <div >
+      {/* <div >
         <SwapComponent />
-      </div>
+      </div> */}
       <div className='page'>
         {page ?
           <Swap

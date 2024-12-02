@@ -36,8 +36,8 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url('/fonts/Roboto-Regular.woff2') format('woff2'),
-    url('/fonts/Roboto-Regular.woff') format('woff');
+  src: url('/fonts/Roboto-Regular.ttf') format('ttf'),
+    url('/fonts/Roboto-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -118,6 +118,14 @@ a {
   width: 480px;
   max-height: 706px;
 }
+
+
+@media (max-width: 480px) {
+  .main {
+    width: 95%;
+  }
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {

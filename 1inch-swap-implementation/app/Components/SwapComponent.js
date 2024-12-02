@@ -17,7 +17,7 @@ const SwapComponent = () => {
   };
 
   return (
-    <button onClick={handleSwap}>
+    <button onClick={() => handleSwap()}>
       Swap Tokens
     </button>
   );
