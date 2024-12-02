@@ -52,7 +52,6 @@ export default function Home() {
   const [active, setActive] = useState(0)
   const [page, setPage] = useState(true)
   const [data, setData] = useState([]);
-  const [prices, setPrices] = useState(1)
   const [price1, setPrice1] = useState()
   const [price2, setPrice2] = useState()
 
@@ -83,10 +82,10 @@ export default function Home() {
 
 
 
-  const GetPrice = async () => {
+  const GetPrice = async (network, token, type) => {
     setLoading(true)
     try {
-      const response = await fetch(`/1inch.dev/price/v1.1/1?currency=USD`, {
+      const response = await fetch(`/1inch.dev/price/v1.1/${network}/${token}?currency=USD`, {
         method: 'GET',
         headers: {
           accept: 'application/json',
@@ -95,7 +94,12 @@ export default function Home() {
       });
       const result = await response.json();
       setLoading(false)
-      setPrices(result)
+      if (type == 1) {
+        setPrice1(Object.values(result))
+      }
+      else {
+        setPrice2(Object.values(result))
+      }
     } catch (err) {
     } finally {
     }
@@ -167,15 +171,27 @@ export default function Home() {
     },
   ]
 
-  useEffect(() => {
-    GetPrice()
-    getTokens(1);
-  }, []);
 
   useEffect(() => {
-    setPrice1(prices[selectedToken[0]?.address])
-    setPrice2(prices[selectedToken[1]?.address])
-  }, [prices, selectedToken[1]?.address, selectedToken[0]?.address])
+    const timeout = setTimeout(() => {
+      GetPrice(selectedNetwork[0].id, selectedToken[0]?.address, 1)
+    }, 1000);
+    const timeout2 = setTimeout(() => {
+      if (selectedToken[1]?.address) {
+        GetPrice(selectedNetwork[1].id, selectedToken[1]?.address, 2)
+      }
+    }, 3000);
+    const timeout3 = setTimeout(() => {
+      getTokens(1);
+    }, 5000);
+    return () => {
+      clearTimeout(timeout)
+      clearTimeout(timeout2)
+      clearTimeout(timeout3)
+    };
+  }, []);
+
+
 
   const ChangeDirection = () => {
     let item = [
@@ -186,7 +202,6 @@ export default function Home() {
   }
 
   const SelectNetwork = (e) => {
-    console.log(e)
     let item = [...selectedNetwork]
     item[active] = e
     setSelectedNetwork(item)
