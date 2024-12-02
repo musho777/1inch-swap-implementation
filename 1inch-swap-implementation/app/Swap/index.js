@@ -16,8 +16,59 @@ const Swap = ({
   GetPrice,
   ChangeDirection,
   selectedNetwork,
-  active
+  active,
+
 }) => {
+
+  const networks = [
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+      id: 1,
+      name: 'Ethereum',
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/bsc_2.svg',
+      id: 56,
+      name: 'BNB Chain',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/polygon_1.svg',
+      id: 137,
+      name: 'Polygon',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/gnosis.svg',
+      id: 100,
+      name: 'Gnosis Chain',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/avalanche.svg',
+      id: 43114,
+      name: 'Avalanche',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/fantom.svg',
+      id: 250,
+      name: 'Fantom',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/aurora.svg',
+      id: 1313161554,
+      name: 'Aurora',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/kaia.svg',
+      id: 42161,
+      name: 'Kaia',
+    },
+  ]
+
   const [connected, setConnected] = useState()
   const [value1, setValue1] = useState(1)
   const [value2, setValue2] = useState()
@@ -37,6 +88,7 @@ const Swap = ({
     setValue1(e)
     setValue2(e * kayf)
   }
+
   return <div className='main'>
     <Header GetPrice={() => GetPrice()} />
     <div className='TokeninputWrapper'>
@@ -46,7 +98,7 @@ const Swap = ({
         result={value1 * price1}
         length={false}
         Change={(e) => Change(e)}
-        selectedNetwork={selectedNetwork[0]}
+        selectedNetwork={networks.find(item => item.id === selectedToken[0].chainId)}
         active={active}
         selectedToken={selectedToken[0]}
         setPage={(e) => {
@@ -75,7 +127,7 @@ const Swap = ({
         inputValue={value2 || ""}
         selectedToken={selectedToken[1]}
         loading={loading}
-        selectedNetwork={selectedNetwork[1]}
+        selectedNetwork={networks.find(item => item.id === selectedToken[0].chainId)}
         result={value2 * price2}
         price2={price2}
         active={active}

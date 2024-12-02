@@ -2,12 +2,39 @@ import './styles.css';
 import { FavouriteToken } from './components/favouriteToken/favouriteToken';
 import { TokenItem } from './components/tokenItem/tokenItem';
 import { BackSvg, ButtonArrow, ClearSvg, SearchSvg } from '@/app/utils/svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectNetWork } from '../Components/SelectNetwork/index'
 
 
-const SelectDestinationToken = ({ setPage, setSelectedToken, data, getTokens, networks, selectedNetwork, setSelectedNetwork }) => {
+const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
   const [value, setValue] = useState("");
+  const [data, setData] = useState([])
+
+  const [netWork, setNetwork] = useState({
+    img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+    id: 1,
+    name: 'Ethereum',
+  })
+
+  const getTokens = async (id = 1) => {
+    try {
+      const response = await fetch(`/1inch.dev/token/v1.2/${id}`, {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer oYtJS37LUR9zy6jylTaeVKlpGZrRffE9',
+        },
+      });
+      const result = await response.json();
+      setData(result || []);
+    } catch (err) {
+    }
+  };
+
+  useEffect(() => {
+    getTokens()
+  }, [])
+
 
   const [arr, setArr] = useState([
     { name: "ETH" },
@@ -28,11 +55,16 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, data, getTokens, ne
           <BackSvg />
         </div>
         <div onClick={() => setOpenSelect(!openSelect)} className="allNetworks">
-          <img src={selectedNetwork.img} alt="All networks" />
-          <p>{selectedNetwork.name}</p>
+          <img src={netWork.img} alt="All networks" />
+          <p>{netWork.name}</p>
           <ButtonArrow color="#fff" />
           <div className={!openSelect ? 'openSelect' : 'openSelect1'}>
-            <SelectNetWork setSelectedNetwork={(e) => setSelectedNetwork(e)} selectedNetwork={selectedNetwork} networks={networks} getTokens={(e) => getTokens(e)} />
+            <SelectNetWork
+              setSelectedNetwork={(e) => setNetwork(e)}
+              selectedNetwork={netWork}
+              networks={networks}
+              getTokens={(e) => getTokens(e)}
+            />
           </div>
         </div>
       </div>
