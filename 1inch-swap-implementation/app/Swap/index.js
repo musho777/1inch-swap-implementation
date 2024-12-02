@@ -17,33 +17,11 @@ const Swap = ({
   ChangeDirection
 }) => {
   const [connected, setConnected] = useState()
-  const [inputValue, setInputValue] = useState("");
   const [value1, setValue1] = useState(1)
   const [value2, setValue2] = useState()
   const [kayf, setKayf] = useState(2)
-  const [result, setResult] = useState("")
 
   const [isRotated, setIsRotated] = useState(false);
-
-  async function connectWallet1() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        window.ethereum.request({ method: 'eth_requestAccounts' })
-          .then(accounts => {
-            if (accounts.length > 0) {
-              setConnected(true)
-            } else {
-            }
-          })
-          .catch(error => {
-          });
-      } catch (error) {
-        setConnected(false)
-      }
-    } else {
-      setConnected(false)
-    }
-  }
 
   useEffect(() => {
     let kayficent = price1 / price2
@@ -53,22 +31,15 @@ const Swap = ({
 
 
 
-  // useEffect(() => {
-  //   connectWallet1()
-  // }, [])
-
-
   const Change = (e) => {
     setValue1(e)
     setValue2(e * kayf)
-    setResult(e * price1)
   }
   return <div className='main'>
     <Header GetPrice={() => GetPrice()} />
     <div className='TokeninputWrapper'>
       <Tokeninput
         inputValue={value1}
-        setInputValue={(e) => setInputValue(e)}
         price={price1}
         result={value1 * price1}
         length={false}
@@ -98,10 +69,8 @@ const Swap = ({
       </div>
       <Tokeninput
         inputValue={value2 || ""}
-        setInputValue={(e) => setInputValue(e)}
         selectedToken={selectedToken[1]}
         loading={loading}
-        // result={result}
         result={value2 * price2}
         price2={price2}
         Change={(e) => Change(e)}

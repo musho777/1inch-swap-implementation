@@ -14,7 +14,6 @@ export const Tokeninput = ({
   price,
   loading,
   inputValue,
-  setInputValue,
   result
 }) => {
 
@@ -24,12 +23,6 @@ export const Tokeninput = ({
     sessionStorage.setItem("value", rawValue)
     if (!second) {
       Change(Number(cleanedValue))
-    }
-    if (cleanedValue !== '') {
-      const formattedInput = cleanedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-      setInputValue(formattedInput);
-    } else {
-      setInputValue('');
     }
   }
 
