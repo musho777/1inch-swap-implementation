@@ -57,11 +57,18 @@ export default function Home() {
   const [price2, setPrice2] = useState()
 
   const [loading, setLoading] = useState(false)
-  const [selectedNetwork, setSelectedNetwork] = useState({
-    img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
-    id: 1,
-    name: 'Ethereum',
-  },)
+  const [selectedNetwork, setSelectedNetwork] = useState([
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+      id: 1,
+      name: 'Ethereum',
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+      id: 1,
+      name: 'Ethereum',
+    }
+  ])
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
@@ -178,6 +185,13 @@ export default function Home() {
     setSelectedToken(item)
   }
 
+  const SelectNetwork = (e) => {
+    console.log(e)
+    let item = [...selectedNetwork]
+    item[active] = e
+    setSelectedNetwork(item)
+  }
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
@@ -203,9 +217,9 @@ export default function Home() {
           <SelectDestinationToken
             networks={networks}
             getTokens={(e) => getTokens(e)}
-            selectedNetwork={selectedNetwork}
+            selectedNetwork={selectedNetwork[active]}
             data={data}
-            setSelectedNetwork={(e) => setSelectedNetwork(e)}
+            setSelectedNetwork={(e) => SelectNetwork(e)}
             setSelectedToken={(e) => {
               Select(e)
               setPage(true)

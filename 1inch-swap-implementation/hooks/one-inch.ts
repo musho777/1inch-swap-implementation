@@ -20,7 +20,6 @@ export const useSwap1Inch = () => {
   }
   const typedValue = 1; // TO DO: get from input
   const router1Inch = ROUTER_ADDRESSES_1INCH[chainId];
-  console.log(account, '22')
   if (!account) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
