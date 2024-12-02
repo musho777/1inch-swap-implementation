@@ -15,59 +15,9 @@ const Swap = ({
   loading,
   GetPrice,
   ChangeDirection,
-  selectedNetwork,
   active,
-
+  networks
 }) => {
-
-  const networks = [
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
-      id: 1,
-      name: 'Ethereum',
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/bsc_2.svg',
-      id: 56,
-      name: 'BNB Chain',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/polygon_1.svg',
-      id: 137,
-      name: 'Polygon',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/gnosis.svg',
-      id: 100,
-      name: 'Gnosis Chain',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/avalanche.svg',
-      id: 43114,
-      name: 'Avalanche',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/fantom.svg',
-      id: 250,
-      name: 'Fantom',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/aurora.svg',
-      id: 1313161554,
-      name: 'Aurora',
-
-    },
-    {
-      img: 'https://app.1inch.io/assets/images/network-logos/kaia.svg',
-      id: 42161,
-      name: 'Kaia',
-    },
-  ]
 
   const [connected, setConnected] = useState()
   const [value1, setValue1] = useState(1)
@@ -96,7 +46,6 @@ const Swap = ({
         inputValue={value1}
         price={price1}
         result={value1 * price1}
-        length={false}
         Change={(e) => Change(e)}
         selectedNetwork={networks.find(item => item.id === selectedToken[0].chainId)}
         active={active}

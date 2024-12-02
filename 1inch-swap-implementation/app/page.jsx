@@ -51,7 +51,6 @@ export default function Home() {
   ])
   const [active, setActive] = useState(0)
   const [page, setPage] = useState(true)
-  const [data, setData] = useState([]);
   const [price1, setPrice1] = useState()
   const [price2, setPrice2] = useState()
   const [loading, setLoading] = useState(false)
@@ -147,7 +146,6 @@ export default function Home() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      console.log(selectedToken[0].chainId)
       GetPrice(selectedToken[0].chainId, selectedToken[0]?.address, 0)
     }, 1000);
     const timeout2 = setTimeout(() => {
@@ -165,13 +163,9 @@ export default function Home() {
 
   const ChangeDirection = () => {
     let item = [selectedToken[1], selectedToken[0]]
+    setPrice1(price2)
+    setPrice2(price1)
     setSelectedToken(item)
-  }
-
-  const SelectNetwork = (e) => {
-    let item = [...selectedNetwork]
-    item[active] = e
-    setSelectedNetwork(item)
   }
 
   return (
@@ -199,8 +193,6 @@ export default function Home() {
           <SelectDestinationToken
             networks={networks}
             getTokens={(e) => getTokens(e)}
-            data={data}
-            setSelectedNetwork={(e) => SelectNetwork(e)}
             setSelectedToken={(e) => {
               Select(e)
               setPage(true)
