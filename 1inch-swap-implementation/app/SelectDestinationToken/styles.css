@@ -52,6 +52,11 @@
   margin-left: 20px;
 }
 
+.allNetworks>img {
+  width: 24px;
+  height: 24px;
+}
+
 .allNetworks:hover {
   background-color: #10141c;
   border-radius: 10px;
@@ -112,4 +117,16 @@
 
 .clearSvg:hover {
   background-color: rgba(108, 134, 173, .15);
+}
+
+.openSelect {
+  opacity: 0;
+  transition: 700ms;
+  z-index: 9999;
+}
+
+.openSelect1 {
+  opacity: 1;
+  transition: 700ms;
+  z-index: 9999;
 }

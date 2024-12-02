@@ -3,10 +3,10 @@ import { FavouriteToken } from './components/favouriteToken/favouriteToken';
 import { TokenItem } from './components/tokenItem/tokenItem';
 import { BackSvg, ButtonArrow, ClearSvg, SearchSvg } from '@/app/utils/svg';
 import { useState } from 'react';
+import { SelectNetWork } from '../Components/SelectNetwork/index'
 
 
-
-const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
+const SelectDestinationToken = ({ setPage, setSelectedToken, data, getTokens, networks, selectedNetwork, setSelectedNetwork }) => {
   const [value, setValue] = useState("");
 
   const [arr, setArr] = useState([
@@ -20,16 +20,20 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
     { name: "BNB" },
   ])
 
+  const [openSelect, setOpenSelect] = useState(false)
   return (
     <div className="main" id="selectDestinationToken">
       <div className="selectTokenHeader">
         <div onClick={() => setPage(true)} className="selectTokenHeaderBack">
           <BackSvg />
         </div>
-        <div className="allNetworks">
-          <img src="https://app.1inch.io/assets/images/network-logos/all-networks.svg" alt="All networks" />
-          <p>All networks</p>
+        <div onClick={() => setOpenSelect(!openSelect)} className="allNetworks">
+          <img src={selectedNetwork.img} alt="All networks" />
+          <p>{selectedNetwork.name}</p>
           <ButtonArrow color="#fff" />
+          <div className={!openSelect ? 'openSelect' : 'openSelect1'}>
+            <SelectNetWork setSelectedNetwork={(e) => setSelectedNetwork(e)} selectedNetwork={selectedNetwork} networks={networks} getTokens={(e) => getTokens(e)} />
+          </div>
         </div>
       </div>
       <div className="selectDestinationToken">
@@ -56,15 +60,11 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, data }) => {
       </div>
       <div key={1} className="TokenItemWrapper">
         {
-          data.map((elm, index) => {
-            if (index == 2) {
-              console.log(elm)
-            }
+          Object.entries(data).map(([address, elm]) => {
             const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
-            if (elm.isFoT)
-              return <div key={`token-${index}`} onClick={() => setSelectedToken(elm)}>
-                <TokenItem name={name} logo={logoURI} />
-              </div>
+            return <div key={`token-${address}`} onClick={() => setSelectedToken(elm)}>
+              <TokenItem name={name} logo={logoURI} />
+            </div>
           })}
       </div>
     </div>

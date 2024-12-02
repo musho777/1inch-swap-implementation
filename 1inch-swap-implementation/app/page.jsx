@@ -1,7 +1,7 @@
 "use client"
 import Swap from './Swap'
 import SelectDestinationToken from './SelectDestinationToken/index'
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import { ConnetWallet } from './Components/ConnectWallet/index'
@@ -57,7 +57,11 @@ export default function Home() {
   const [price2, setPrice2] = useState()
 
   const [loading, setLoading] = useState(false)
-
+  const [selectedNetwork, setSelectedNetwork] = useState({
+    img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+    id: 1,
+    name: 'Ethereum',
+  },)
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = () => {
@@ -91,9 +95,9 @@ export default function Home() {
   };
 
 
-  const fetchData = useCallback(async () => {
+  const getTokens = async (id = 1) => {
     try {
-      const response = await fetch("/1inch.dev/token/v1.2/multi-chain", {
+      const response = await fetch(`/1inch.dev/token/v1.2/${id}`, {
         method: 'GET',
         headers: {
           accept: 'application/json',
@@ -105,15 +109,63 @@ export default function Home() {
     } catch (err) {
     } finally {
     }
-  }, []);
+  };
+
+  const networks = [
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/ethereum.svg',
+      id: 1,
+      name: 'Ethereum',
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/bsc_2.svg',
+      id: 56,
+      name: 'BNB Chain',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/polygon_1.svg',
+      id: 137,
+      name: 'Polygon',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/gnosis.svg',
+      id: 100,
+      name: 'Gnosis Chain',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/avalanche.svg',
+      id: 43114,
+      name: 'Avalanche',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/fantom.svg',
+      id: 250,
+      name: 'Fantom',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/aurora.svg',
+      id: 1313161554,
+      name: 'Aurora',
+
+    },
+    {
+      img: 'https://app.1inch.io/assets/images/network-logos/kaia.svg',
+      id: 42161,
+      name: 'Kaia',
+    },
+  ]
 
   useEffect(() => {
     GetPrice()
-    fetchData();
+    getTokens(1);
   }, []);
 
   useEffect(() => {
-    console.log(prices[selectedToken[1]?.address])
     setPrice1(prices[selectedToken[0]?.address])
     setPrice2(prices[selectedToken[1]?.address])
   }, [prices, selectedToken[1]?.address, selectedToken[0]?.address])
@@ -143,12 +195,17 @@ export default function Home() {
             price2={price2 ? price2 : 0}
             setActive={(e) => setActive(e)}
             selectedToken={selectedToken}
+            selectedNetwork={selectedNetwork}
             handleClick={() => handleClick()}
             setPage={(e) => setPage(e)}
             ChangeDirection={() => ChangeDirection()}
           /> :
           <SelectDestinationToken
+            networks={networks}
+            getTokens={(e) => getTokens(e)}
+            selectedNetwork={selectedNetwork}
             data={data}
+            setSelectedNetwork={(e) => setSelectedNetwork(e)}
             setSelectedToken={(e) => {
               Select(e)
               setPage(true)

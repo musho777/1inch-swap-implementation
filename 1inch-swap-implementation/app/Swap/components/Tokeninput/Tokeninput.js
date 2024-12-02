@@ -14,7 +14,8 @@ export const Tokeninput = ({
   price,
   loading,
   inputValue,
-  result
+  result,
+  selectedNetwork
 }) => {
 
   const handleInputChange = (event) => {
@@ -55,7 +56,7 @@ export const Tokeninput = ({
             <ButtonArrow />
           </button>
         </div> :
-        <Select second={second} name={selectedToken.symbol} img={selectedToken?.logoURI} setPage={() => setPage(false)} />
+        <Select selectedNetwork={selectedNetwork} second={second} name={selectedToken.symbol} img={selectedToken?.logoURI} setPage={() => setPage(false)} />
       }
       <div className='inputLoading'>
         {(loading && selectedToken) ?

@@ -14,7 +14,8 @@ const Swap = ({
   price2,
   loading,
   GetPrice,
-  ChangeDirection
+  ChangeDirection,
+  selectedNetwork
 }) => {
   const [connected, setConnected] = useState()
   const [value1, setValue1] = useState(1)
@@ -44,6 +45,7 @@ const Swap = ({
         result={value1 * price1}
         length={false}
         Change={(e) => Change(e)}
+        selectedNetwork={selectedNetwork}
         selectedToken={selectedToken[0]}
         setPage={(e) => {
           setPage(false)
