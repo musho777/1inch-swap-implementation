@@ -89,11 +89,13 @@ const Swap = ({
           transition: "transform 0.3s ease",
         }}
         onClick={() => {
-          setKayf(1 / kayf)
-          ChangeDirection()
-          setValue1(value2)
-          setValue2(value1)
-          setIsRotated(!isRotated)
+          if (Object.keys(selectedToken[1]).length) {
+            setKayf(1 / kayf)
+            ChangeDirection()
+            setValue1(value2)
+            setValue2(value1)
+            setIsRotated(!isRotated)
+          }
         }}
         className='swapDirectionArrow'
       >

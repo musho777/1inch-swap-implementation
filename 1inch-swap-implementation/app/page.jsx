@@ -30,24 +30,25 @@ export default function Home() {
         "PEG:ETH"
       ]
     },
-    {
-      address: "0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790",
-      chainId: 1,
-      decimals: 18,
-      eip2612: false,
-      isFoT: true,
-      logoURI: "https://tokens-data.1inch.io/images/1/0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790.png",
-      name: "PeiPei",
-      providers: [
-        "1inch",
-        "CoinGecko",
-        "Kleros Tokens"
-      ],
-      symbol: "PEIPEI",
-      tags: [
-        "tokens"
-      ]
-    }
+    {}
+    // {
+    //   address: "0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790",
+    //   chainId: 1,
+    //   decimals: 18,
+    //   eip2612: false,
+    //   isFoT: true,
+    //   logoURI: "https://tokens-data.1inch.io/images/1/0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790.png",
+    //   name: "PeiPei",
+    //   providers: [
+    //     "1inch",
+    //     "CoinGecko",
+    //     "Kleros Tokens"
+    //   ],
+    //   symbol: "PEIPEI",
+    //   tags: [
+    //     "tokens"
+    //   ]
+    // }
   ])
   const [active, setActive] = useState(0)
   const [page, setPage] = useState(true)
@@ -64,13 +65,14 @@ export default function Home() {
   const Select = (e) => {
     let item = [...selectedToken]
     item[active] = e
-    GetPrice(selectedToken[active].chainId, e.address, active)
+    GetPrice(item[active].chainId, e.address, active)
     setSelectedToken(item)
   }
 
 
 
   const GetPrice = async (network, token, type) => {
+    console.log(network, token, type)
     setLoading(true)
     try {
       const response = await fetch(`/1inch.dev/price/v1.1/${network}/${token}?currency=USD`, {
