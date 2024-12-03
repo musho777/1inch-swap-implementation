@@ -6,10 +6,19 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { ConnetWallet } from './Components/ConnectWallet/index'
 import SwapComponent from './Components/SwapComponent'
+
+import { config } from '@/config/config';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider } from 'wagmi';
+
+
 const getLibrary = (provider) => {
   return new Web3Provider(provider);
 };
+
 export default function Home() {
+
   const [selectedToken, setSelectedToken] = useState([
     {
       address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
@@ -171,41 +180,60 @@ export default function Home() {
     setPrice2(price1)
     setSelectedToken(item)
   }
+  // const { open } = useAppKit()
 
+
+  const queryClient = new QueryClient();
+
+
+
+  // return (
+  //   <WagmiProvider config={config}>
+  //     <QueryClientProvider client={queryClient}>
+  //       <div style={{ backgroundColor: 'red' }} className="container">
+  //         <Connect />
+  //       </div>
+  //     </QueryClientProvider>
+  //   </WagmiProvider>
+  // )
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
-        <ConnetWallet setConnected={(e) => setConnected(e)} isVisible={isVisible} handleClick={() => handleClick()} />
-      </div>
-      {<SwapComponent />}
-      <div className='page'>
-        {page ?
-          <Swap
-            GetPrice={() => GetPrice()}
-            loading={loading}
-            networks={networks}
-            price1={price1}
-            price2={price2 ? price2 : 0}
-            setActive={(e) => setActive(e)}
-            selectedToken={selectedToken}
-            handleClick={() => handleClick()}
-            setPage={(e) => setPage(e)}
-            ChangeDirection={() => ChangeDirection()}
-            setConnected={(e) => setConnected(e)}
-            connected={connected}
-          /> :
-          <SelectDestinationToken
-            networks={networks}
-            getTokens={(e) => getTokens(e)}
-            setSelectedToken={(e) => {
-              Select(e)
-              setPage(true)
-            }}
-            setPage={(e) => setPage(e)}
-          />
-        }
-      </div>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
+            <ConnetWallet setConnected={(e) => setConnected(e)} isVisible={isVisible} handleClick={() => handleClick()} />
+          </div>
+          {<SwapComponent />}
+          <div className='page'>
+            {page ?
+              <Swap
+                GetPrice={() => GetPrice()}
+                loading={loading}
+                networks={networks}
+                price1={price1}
+                price2={price2 ? price2 : 0}
+                setActive={(e) => setActive(e)}
+                selectedToken={selectedToken}
+                handleClick={() => handleClick()}
+                setPage={(e) => setPage(e)}
+                ChangeDirection={() => ChangeDirection()}
+                setConnected={(e) => setConnected(e)}
+                connected={connected}
+              /> :
+              <SelectDestinationToken
+                networks={networks}
+                getTokens={(e) => getTokens(e)}
+                setSelectedToken={(e) => {
+                  Select(e)
+                  setPage(true)
+                }}
+                setPage={(e) => setPage(e)}
+              />
+            }
+          </div>
+        </QueryClientProvider>
+      </WagmiProvider>
     </Web3ReactProvider>
   );
 }

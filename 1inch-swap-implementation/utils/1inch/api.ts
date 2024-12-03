@@ -26,6 +26,6 @@ export async function buildTxForSwap1Inch(
     const response = await axios1Inch.get(url);
     return response.data.tx;
   } catch (err) {
-    console.error(err);
+    alert(err.response.data.description)
   }
 }

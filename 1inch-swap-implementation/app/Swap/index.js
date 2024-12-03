@@ -4,6 +4,8 @@ import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { useEffect, useState } from 'react'
 import { DownSvg, WalletSvg } from '../utils/svg'
+import { useAccount } from 'wagmi'
+import { useSwap1Inch } from '@/hooks/one-inch'
 
 const Swap = ({
   setPage,
@@ -17,11 +19,10 @@ const Swap = ({
   ChangeDirection,
   active,
   networks,
-  connected,
   setConnected,
 }) => {
 
-
+  const { swap1Inch } = useSwap1Inch(selectedToken) || {};
   const [value1, setValue1] = useState(1)
   const [value2, setValue2] = useState()
   const [kayf, setKayf] = useState(2)
@@ -55,9 +56,11 @@ const Swap = ({
     }
   }
 
-  useEffect(() => {
-    connectWallet1()
-  }, [])
+  // useEffect(() => {
+  //   connectWallet1()
+  // }, [])
+
+  const { isConnected } = useAccount();
 
 
 
@@ -128,9 +131,12 @@ const Swap = ({
         </div>
       </div>
     </div> */}
+    {
+      console.log(selectedToken[0].address)
+    }
     <div>
-      {connected ?
-        <button disabled id='connectedButton' className='button'>
+      {isConnected ?
+        <button onClick={() => swap1Inch(selectedToken[0].address, selectedToken[1].address, value1)} className='button'>
           Swap
         </button> :
         <button onClick={() => handleClick()} className='button'>
