@@ -2,14 +2,14 @@
 import Swap from './Swap'
 import SelectDestinationToken from './SelectDestinationToken/index'
 import { useEffect, useState } from 'react';
-import { Web3ReactProvider } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
+import { Web3ReactProvider } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 import { ConnetWallet } from './Components/ConnectWallet/index'
+import SwapComponent from './Components/SwapComponent'
+const getLibrary = (provider) => {
+  return new Web3Provider(provider);
+};
 export default function Home() {
-  function getLibrary(provider) {
-    return new Web3Provider(provider);
-  }
-
   const [selectedToken, setSelectedToken] = useState([
     {
       address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
@@ -173,9 +173,7 @@ export default function Home() {
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
         <ConnetWallet isVisible={isVisible} handleClick={() => handleClick()} />
       </div>
-      <div >
-        {/* <SwapComponent /> */}
-      </div>
+      {isVisible && <SwapComponent />}
       <div className='page'>
         {page ?
           <Swap

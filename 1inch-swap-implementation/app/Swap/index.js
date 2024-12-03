@@ -3,7 +3,7 @@ import './styles.css'
 import { Tokeninput } from './components/Tokeninput/Tokeninput'
 import { Header } from './components/Heade/Hearder'
 import { useEffect, useState } from 'react'
-import { ArrowIcon, DownSvg, Gasolin, WalletSvg } from '../utils/svg'
+import { DownSvg, WalletSvg } from '../utils/svg'
 
 const Swap = ({
   setPage,
@@ -31,6 +31,31 @@ const Swap = ({
     setKayf(kayficent)
     setValue2(value1 * kayficent)
   }, [price1, price2])
+
+  async function connectWallet1() {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        window.ethereum.request({ method: 'eth_requestAccounts' })
+          .then(accounts => {
+            if (accounts.length > 0) {
+              setConnected(false)
+            } else {
+            }
+          })
+          .catch(error => {
+            console.log(accounts, '20000-')
+          });
+      } catch (error) {
+        setConnected(false)
+      }
+    } else {
+      setConnected(false)
+    }
+  }
+
+  useEffect(() => {
+    connectWallet1()
+  }, [])
 
 
 

@@ -8,6 +8,7 @@ import isZero from "@/utils/isZero";
 import { BigNumber } from "@ethersproject/bignumber";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
+import { useEffect } from "react";
 
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
@@ -15,9 +16,25 @@ const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
 export const useSwap1Inch = () => {
   const chainId = 1;
   const { account, library, activate, deactivate } = useWeb3React();
-  if (!account) {
-    activate(injected);
-  }
+
+
+  const connectWallet = async () => {
+    const injected = new InjectedConnector({
+      supportedChainIds: [1, 3, 4, 5, 42],
+    });
+    try {
+      console.log(account)
+      await activate(injected); // Activates the injected provider (e.g., MetaMask)
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    }
+  };
+
+  useEffect(() => {
+    connectWallet()
+  }, [])
+
+
   const typedValue = 1; // TO DO: get from input
   const router1Inch = ROUTER_ADDRESSES_1INCH[chainId];
   if (!account) return;

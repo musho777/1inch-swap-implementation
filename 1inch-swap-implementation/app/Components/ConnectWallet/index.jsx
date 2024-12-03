@@ -1,8 +1,12 @@
 import { ClearSvg, Logo, MetaMask, WalletSvg } from '@/app/utils/svg'
 import './styles.css'
 import { ethers } from "ethers";
+import { useWeb3React } from '@web3-react/core';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 export const ConnetWallet = ({ handleClick, isVisible }) => {
+
+
 
 
   async function connectWallet1() {
@@ -36,6 +40,21 @@ export const ConnetWallet = ({ handleClick, isVisible }) => {
         console.error("Metamask is not installed. Please install it to continue.");
       }
   }
+  const { activate, account } = useWeb3React();
+
+  console.error(account)
+
+  const connectWallet = async () => {
+    const injected = new InjectedConnector({
+      supportedChainIds: [1, 3, 4, 5, 42],
+    });
+    try {
+      console.log(account)
+      await activate(injected); // Activates the injected provider (e.g., MetaMask)
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    }
+  };
 
 
   return <div className='connetWallet'>
@@ -46,7 +65,7 @@ export const ConnetWallet = ({ handleClick, isVisible }) => {
       </div>
     </div>
     <div className='walletItemWrapper'>
-      <div className='walletItem'>
+      <div onClick={() => connectWallet()} className='walletItem'>
         <Logo />
         <p>1inch Wallet </p>
       </div>
