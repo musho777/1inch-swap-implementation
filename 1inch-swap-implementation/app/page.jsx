@@ -55,6 +55,7 @@ export default function Home() {
   const [price2, setPrice2] = useState()
   const [loading, setLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false);
+  const [connected, setConnected] = useState()
 
   const handleClick = () => {
     setIsVisible(!isVisible)
@@ -168,12 +169,13 @@ export default function Home() {
     setSelectedToken(item)
   }
 
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
-        <ConnetWallet isVisible={isVisible} handleClick={() => handleClick()} />
+        <ConnetWallet setConnected={(e) => setConnected(e)} isVisible={isVisible} handleClick={() => handleClick()} />
       </div>
-      {isVisible && <SwapComponent />}
+      {<SwapComponent />}
       <div className='page'>
         {page ?
           <Swap
@@ -187,6 +189,8 @@ export default function Home() {
             handleClick={() => handleClick()}
             setPage={(e) => setPage(e)}
             ChangeDirection={() => ChangeDirection()}
+            setConnected={(e) => setConnected(e)}
+            connected={connected}
           /> :
           <SelectDestinationToken
             networks={networks}

@@ -6,43 +6,44 @@ import { ROUTER_ADDRESSES_1INCH } from "@/utils/constants";
 import { generate1InchSwapParmas, getSigner } from "@/utils/helpers";
 import isZero from "@/utils/isZero";
 import { BigNumber } from "@ethersproject/bignumber";
-import { useWeb3React } from "@web3-react/core";
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Web3 from 'web3';
 
 
-const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
 
 export const useSwap1Inch = () => {
+  const web3 = new Web3(Web3.givenProvider);
+  const library = web3;
   const chainId = 1;
-  const { account, library, activate, deactivate } = useWeb3React();
+  const [accaunt, setAccaunt] = useState()
 
-
-  const connectWallet = async () => {
-    const injected = new InjectedConnector({
-      supportedChainIds: [1, 3, 4, 5, 42],
-    });
-    try {
-      console.log(account)
-      await activate(injected); // Activates the injected provider (e.g., MetaMask)
-    } catch (error) {
-      console.error('Error connecting wallet:', error);
-    }
-  };
 
   useEffect(() => {
-    connectWallet()
+    getAccount()
   }, [])
+
+  async function getAccount() {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      console.log('Connected account:', accounts[0]);
+      setAccaunt(accounts[0])
+      return accounts[0]; // First account
+    } catch (error) {
+      console.error('User denied account access:', error);
+    }
+  }
+
+  // const { account, library, activate } = useWeb3React();
+
 
 
   const typedValue = 1; // TO DO: get from input
   const router1Inch = ROUTER_ADDRESSES_1INCH[chainId];
-  if (!account) return;
+  if (!accaunt) return;
 
   const from = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address from
 
-  const to = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // TO DO: set address to
-
+  const to = "0x3ffeea07a27fab7ad1df5297fa75e77a43cb5790"; // TO DO: set address to
   const swap1Inch = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -50,7 +51,7 @@ export const useSwap1Inch = () => {
       from,
       to,
       Number(typedValue),
-      account,
+      accaunt,
       1
     );
 
@@ -61,14 +62,14 @@ export const useSwap1Inch = () => {
 
     try {
       const tx = {
-        from: account ?? "",
+        from: getAccount() ?? "",
         to: router1Inch,
         data: swapTransaction.data,
         ...(swapTransaction.value && !isZero(swapTransaction.value)
           ? { value: swapTransaction.value.toString(16) } // Convert to Hex.If not working use toHex() from @uniswap/v3-sdk 
           : {}),
       };
-      const response = await getSigner(library, account)
+      const response = await getSigner(library, accaunt)
         .estimateGas(tx)
         .then((estimate: BigNumber) => {
           const newTxn = {
@@ -76,7 +77,7 @@ export const useSwap1Inch = () => {
             gasLimit: calculateGasMargin(estimate),
           };
 
-          return getSigner(library, account)
+          return getSigner(library, accaunt)
             .sendTransaction(newTxn)
             .then((response: { hash: any }) => {
               if (!response.hash) {

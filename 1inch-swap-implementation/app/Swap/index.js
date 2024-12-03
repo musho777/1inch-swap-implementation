@@ -16,10 +16,12 @@ const Swap = ({
   GetPrice,
   ChangeDirection,
   active,
-  networks
+  networks,
+  connected,
+  setConnected,
 }) => {
 
-  const [connected, setConnected] = useState()
+
   const [value1, setValue1] = useState(1)
   const [value2, setValue2] = useState()
   const [kayf, setKayf] = useState(2)
@@ -38,7 +40,7 @@ const Swap = ({
         window.ethereum.request({ method: 'eth_requestAccounts' })
           .then(accounts => {
             if (accounts.length > 0) {
-              setConnected(false)
+              setConnected(true)
             } else {
             }
           })

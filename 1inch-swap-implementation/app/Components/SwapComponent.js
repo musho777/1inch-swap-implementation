@@ -2,7 +2,12 @@ import React from "react";
 import { useSwap1Inch } from "@/hooks/one-inch.ts";
 
 const SwapComponent = () => {
+
+
+
   const { swap1Inch } = useSwap1Inch() || {};
+
+
 
   const handleSwap = async () => {
     try {
