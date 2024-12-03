@@ -1,7 +1,7 @@
 import { I1InchSwapParams } from "../helpers";
 import axios1Inch from "./axiosInstance";
 
-const oneInchBaseUrl = '/1inch.dev';
+const oneInchBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const create1InchProxyUrl = (url: string) =>
   `${oneInchBaseUrl}${url}`;
@@ -26,6 +26,6 @@ export async function buildTxForSwap1Inch(
     const response = await axios1Inch.get(url);
     return response.data.tx;
   } catch (err) {
-    alert(err.response.data.description)
+    alert(err?.response.data.description)
   }
 }

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { ConnetWallet } from './Components/ConnectWallet/index'
-import SwapComponent from './Components/SwapComponent'
 
 import { config } from '@/config/config';
 
@@ -84,7 +83,7 @@ export default function Home() {
     console.log(network, token, type)
     setLoading(true)
     try {
-      const response = await fetch(`/1inch.dev/price/v1.1/${network}/${token}?currency=USD`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/price/v1.1/${network}/${token}?currency=USD`, {
         method: 'GET',
         headers: {
           accept: 'application/json',
@@ -157,7 +156,6 @@ export default function Home() {
 
 
   useEffect(() => {
-    console.log("1--")
     const timeout = setTimeout(() => {
       GetPrice(selectedToken[0].chainId, selectedToken[0]?.address, 0)
     }, 1000);
@@ -180,22 +178,10 @@ export default function Home() {
     setPrice2(price1)
     setSelectedToken(item)
   }
-  // const { open } = useAppKit()
-
 
   const queryClient = new QueryClient();
 
-
-
-  // return (
-  //   <WagmiProvider config={config}>
-  //     <QueryClientProvider client={queryClient}>
-  //       <div style={{ backgroundColor: 'red' }} className="container">
-  //         <Connect />
-  //       </div>
-  //     </QueryClientProvider>
-  //   </WagmiProvider>
-  // )
+  console.log(process.env.NEXT_PUBLIC_API_URL, '12292398238238938238292389283')
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
@@ -204,7 +190,6 @@ export default function Home() {
           <div className='connetWalletWrapper' id={isVisible ? "connetWallet" : ''}>
             <ConnetWallet setConnected={(e) => setConnected(e)} isVisible={isVisible} handleClick={() => handleClick()} />
           </div>
-          {<SwapComponent />}
           <div className='page'>
             {page ?
               <Swap

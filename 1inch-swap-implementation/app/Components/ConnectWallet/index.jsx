@@ -8,13 +8,13 @@ import Web3Modal from 'web3modal';
 import { Connect } from '@/config/Connect';
 import { useAccount } from 'wagmi';
 
-export const ConnetWallet = ({ handleClick, isVisible, setConnected }) => {
+export const ConnetWallet = ({ handleClick, setConnected }) => {
 
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider, // Define WalletConnect package
       options: {
-        infuraId: '97560baebb6cd7dfcd26427e68170c23', // Replace with your Infura Project ID
+        infuraId: process.env.NEXT_PUBLIC_API_INFURAID, // Replace with your Infura Project ID
       },
     },
   };

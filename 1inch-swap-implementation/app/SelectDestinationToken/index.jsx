@@ -19,7 +19,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
 
   const getTokens = async (id = 1) => {
     try {
-      const response = await fetch(`/1inch.dev/token/v1.2/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/token/v1.2/${id}`, {
         method: 'GET',
         headers: {
           accept: 'application/json',
@@ -36,18 +36,6 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
   useEffect(() => {
     getTokens()
   }, [])
-
-
-  const [arr, setArr] = useState([
-    { name: "ETH" },
-    { name: "WETH" },
-    { name: "USDC" },
-    { name: "DAI" },
-    { name: "USDT" },
-    { name: "WBTC" },
-    { name: "1INCH" },
-    { name: "BNB" },
-  ])
 
   const [openSelect, setOpenSelect] = useState(false)
   return (
@@ -86,11 +74,6 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
             onChange={(e) => searchData(e.target.value)}
             placeholder="Search by name or paste address"
           />
-        </div>
-        <div className="favouriteTokenWrapper">
-          {arr.map((elm, index) => (
-            <FavouriteToken name={elm.name} key={index} />
-          ))}
         </div>
       </div>
       {!loading ? <div className="TokenItemWrapper">
