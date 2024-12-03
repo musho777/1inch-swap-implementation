@@ -45,7 +45,6 @@ export const Tokeninput = ({
     return
   }
 
-
   return <div id={second ? "tokeninput" : ""} className='tokeninput'>
     {selectedToken && <p className='font13'>{!second ? "You pay" : "You receive"}</p>}
     <div className='inputwrapper'>
@@ -59,7 +58,7 @@ export const Tokeninput = ({
         <Select selectedNetwork={selectedNetwork} second={second} name={selectedToken.symbol} img={selectedToken?.logoURI} setPage={() => setPage(false)} />
       }
       <div className='inputLoading'>
-        {(loading && selectedToken) ?
+        {(loading && selectedToken || !result) ?
           <Skeleton width={"140px"} baseColor="#202020" highlightColor="#444" /> :
           <input
             disabled={second}
@@ -78,7 +77,7 @@ export const Tokeninput = ({
     {selectedToken && second &&
       <div className='result'>
         <p id="selectedName">{selectedToken?.name}</p>
-        {loading ?
+        {loading || !result ?
           <Skeleton height={10} width={"60px"} baseColor="#202020" highlightColor="#444" /> :
           result > 0 && <p>{Price(result)}</p>
         }

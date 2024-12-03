@@ -81,11 +81,11 @@ export default function Home() {
         },
       });
       const result = await response.json();
+      setLoading(false)
       if (type == 0) {
         setPrice1(Object.values(result))
       }
       else {
-        setLoading(false)
         setPrice2(Object.values(result))
       }
     } catch (err) {
@@ -146,6 +146,7 @@ export default function Home() {
 
 
   useEffect(() => {
+    console.log("1--")
     const timeout = setTimeout(() => {
       GetPrice(selectedToken[0].chainId, selectedToken[0]?.address, 0)
     }, 1000);
