@@ -7,7 +7,7 @@
   padding: 20px 8px 6px 12px;
   overflow: scroll;
   top: 55px;
-  z-index: 9999;
+  z-index: 999;
   left: 0;
   right: 0;
   margin: auto;
@@ -15,6 +15,7 @@
   flex-direction: column;
   gap: 20px;
 }
+
 
 .selectNetWorkItem>p {
   font-size: 14px;

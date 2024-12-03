@@ -122,7 +122,6 @@
 .openSelect {
   opacity: 0;
   transition: 700ms;
-  z-index: 9999;
 }
 
 .openSelect1 {

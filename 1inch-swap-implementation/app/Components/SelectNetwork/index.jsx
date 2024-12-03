@@ -1,9 +1,9 @@
 import './styles.css'
 import { CheckSvg } from '@/app/utils/svg'
-export const SelectNetWork = ({ getTokens, networks, selectedNetwork, setSelectedNetwork }) => {
+export const SelectNetWork = ({ openSelect, getTokens, networks, selectedNetwork, setSelectedNetwork }) => {
   return <div className='selectNetWork'>
-    {networks.map((elm, i) => {
-      return <div onClick={() => {
+    {openSelect && networks.map((elm, i) => {
+      return <div key={i} onClick={() => {
         setSelectedNetwork(elm)
         getTokens(elm.id)
       }} className='selectNetWorkItemWrapper'>

@@ -62,6 +62,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
           <ButtonArrow color="#fff" />
           <div className={!openSelect ? 'openSelect' : 'openSelect1'}>
             <SelectNetWork
+              openSelect={openSelect}
               setSelectedNetwork={(e) => setNetwork(e)}
               selectedNetwork={netWork}
               networks={networks}
@@ -92,7 +93,7 @@ const SelectDestinationToken = ({ setPage, setSelectedToken, networks }) => {
           ))}
         </div>
       </div>
-      {!loading ? <div key={1} className="TokenItemWrapper">
+      {!loading ? <div className="TokenItemWrapper">
         {
           Object.entries(data).map(([address, elm]) => {
             const { name = 'Unnamed Token', logoURI = 'default-logo.png' } = elm || {};
