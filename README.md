@@ -16,7 +16,7 @@
    ![Wallet Connection Screenshot](/app/utils/images/WalletConnection.png)
 
 4. **Connect your wallet  Interface:**
-   ![Wallet Connection Screenshot](/app/utils/images/Connectyourwallet.png)
+   ![Wallet Connection Screenshot](/app/utils/images/Connectyourwallett.png)
    
 5. **Select Chain Interface:**
    ![Wallet Connection Screenshot](/app/utils/images/Chainselection.png)   
