@@ -8,15 +8,18 @@
 
 ## Screenshots
 1. **Token Swap Interface:**
-   ![Token Swap Screenshot](../Screenshot%202024-12-04%20at%2010.10.45.png)
-1. **Select Token Interface:**
-   ![Token Swap Screenshot](../Screenshot%202024-12-04%20at%2010.10.52.png)
+   ![Token Swap Screenshot](/app/utils/images/TokenSwapScreenshot.png)
+2. **Select Token Interface:**
+   ![Select Token Screenshot](/app/utils/images/SelectToken.png)
 
-2. **Wallet Connection Interface:**
-   ![Wallet Connection Screenshot](../Screenshot%202024-12-04%20at%2010.11.13.png)
+3. **Wallet Connection Interface:**
+   ![Wallet Connection Screenshot](/app/utils/images/WalletConnection.png)
 
-3. **Connect y our wallet  Interface:**
-   ![Wallet Connection Screenshot](../Screenshot%202024-12-04%20at%2010.11.20.png)
+4. **Connect your wallet  Interface:**
+   ![Wallet Connection Screenshot](/app/utils/images/Connectyourwallet.png)
+   
+5. **Select Chain Interface:**
+   ![Wallet Connection Screenshot](/app/utils/images/Chainselection.png)   
 
 ## Video Demonstration
 Watch the video demonstrating the feature flow:
