@@ -15,7 +15,7 @@
 2. **Wallet Connection Interface:**
    ![Wallet Connection Screenshot](../Screenshot%202024-12-04%20at%2010.11.13.png)
 
-3. **Connect your wallet  Interface:**
+3. **Connect y our wallet  Interface:**
    ![Wallet Connection Screenshot](../Screenshot%202024-12-04%20at%2010.11.20.png)
 
 ## Video Demonstration
